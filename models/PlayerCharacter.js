@@ -1,6 +1,6 @@
-"use strict";
-
-var PlayerCharacter = (function() {
+// No `var` makes it global in Meteor
+PlayerCharacter = (function() {
+    "use strict";
     var CHARACTER_SIZES = {
         SMALL: "S",
         MEDIUM: "M",
@@ -144,6 +144,7 @@ var PlayerCharacter = (function() {
     return PlayerCharacter;
 })();
 
+// For accessing with node
 if (module) {
     module.exports = PlayerCharacter;
 }

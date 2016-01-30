@@ -1,4 +1,7 @@
-var Campaign = (function() {
+// No `var` makes it global in Meteor
+Campaign = (function() {
+    "use strict";
+
     // Constructor
     function Campaign(name) {
         if (!name)
@@ -50,6 +53,7 @@ var Campaign = (function() {
     return Campaign;
 })();
 
+// For accessing with node
 if (module) {
     module.exports = Campaign;
 }
