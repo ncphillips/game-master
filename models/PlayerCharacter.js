@@ -29,12 +29,13 @@ PlayerCharacter = (function() {
         return this.__data__.name;
     };
 
-    PlayerCharacter.prototype.addStatusEffect = function(){
+    PlayerCharacter.prototype.addStatusEffect = function(statusEffect){
+        this.__data__.statusEffects.push(statusEffect);
 
     };
 
-    PlayerCharacter.prototype.hasStatusEffect = function(statusEffect){
-        return true;
+    PlayerCharacter.prototype.getStatusEffects = function(){
+        return this.__data__.statusEffects;
     };
 
     // Private Functions
@@ -132,6 +133,8 @@ PlayerCharacter = (function() {
         validData.campaign = data.campaign;
         validData.description = data.description;
         validData.background = data.background;
+
+        validData.statusEffects = data.statusEffects || [];
 
         // Players
         validData.playerCharacter = data.playerCharacter;

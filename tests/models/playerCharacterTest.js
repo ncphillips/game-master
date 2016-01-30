@@ -13,6 +13,12 @@ describe("PlayerCharacters", function() {
 
            playerCharacter.getName().should.equal(data.name);
        });
+
+        it("should have no status effects", function(){
+            var playerCharacter = new PlayerCharacter(data);
+
+            playerCharacter.getStatusEffects().length.should.equal(0);
+        });
     });
 
     describe("adding status effects to a player", function(){
@@ -22,7 +28,7 @@ describe("PlayerCharacters", function() {
 
             playerCharacter.addStatusEffect(statusEffect);
 
-            playerCharacter.hasStatusEffect(statusEffect).should.be.true();
+            playerCharacter.getStatusEffects().length.should.equal(1);
 
         });
     });
