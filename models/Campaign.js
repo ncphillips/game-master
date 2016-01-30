@@ -1,6 +1,9 @@
 var Campaign = (function() {
     // Constructor
     function Campaign(name) {
+        if (!name)
+            throw new Error("A campaign must have a name");
+
         this.name = name;
 
         this.__data__ = {
@@ -44,9 +47,7 @@ var Campaign = (function() {
     }
 
     // Static API
-    return {
-        create: createCampaign
-    };
+    return Campaign;
 })();
 
 if (module) {
