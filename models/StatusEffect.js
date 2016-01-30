@@ -37,6 +37,7 @@ StatusEffect = (function(){
 })();
 
 // For accessing with Node
-if(module){
+if(typeof module !== 'undefined') {
     module.exports = StatusEffect
+
 }

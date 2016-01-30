@@ -66,6 +66,6 @@ Campaign = (function() {
 })();
 
 // For accessing with node
-if (module) {
+if(typeof module !== 'undefined') {
     module.exports = Campaign;
 }

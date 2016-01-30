@@ -1,4 +1,4 @@
-if(module) {
+if(typeof module !== 'undefined') {
     Campaign = require("../models/Campaign");
 }
 // No `var` makes it global in Meteor
@@ -39,6 +39,6 @@ CampaignCollection = (function(){
 })();
 
 // For accessing with node
-if(module) {
+if(typeof module !== 'undefined') {
     module.exports = CampaignCollection;
 }
