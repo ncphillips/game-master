@@ -19,6 +19,13 @@ describe("CampaignCollection", function() {
         },
         findOne: function(id){
             return this.rows[id];
+        },
+        findAll: function(){
+            var campaigns = [];
+            for(var i=0; i < this.nextId; i++) {
+                campaigns.push(this.rows[i]);
+            }
+            return campaigns;
         }
     };
 
@@ -57,6 +64,20 @@ describe("CampaignCollection", function() {
         it("should throw an error if there is no campaign with that id", function(){
             (function() { campaignCollection.findById(null);}).should.throw("No such Campaign exists");
         });
+    });
+
+    describe("retrieving all campaigns", function(){
+       it("should return campaigns", function(){
+           var campaign = new Campaign(campaignData);
+           campaignCollection.save(campaign);
+           campaignCollection.save(campaign);
+           campaignCollection.save(campaign);
+
+           campaignCollection.findAll().forEach(function(campaign){
+               (Campaign.prototype.isPrototypeOf(campaign)).should.be.true();
+           });
+
+       });
     });
 
 });
