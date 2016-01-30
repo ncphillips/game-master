@@ -1,5 +1,5 @@
 var should = require("should");
-var CampaignCollection = require("../collections/CampaignCollection");
+var CampaignCollection = require("../collections/MockCampaignCollection");
 var Campaign = require("../models/Campaign");
 
 describe("CampaignCollection", function() {
