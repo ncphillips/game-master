@@ -65,6 +65,17 @@ describe("Campaign", function() {
 
             campaign.getPlayerCharacters().length.should.equal(1);
         });
+
+        it("should not be able to add the player a second time", function() {
+            var campaign = Campaign.create(campaignName);
+            var playerCharacter = PlayerCharacter.create("Thorgon");
+
+            var addPC = campaign.addPlayerCharacter.bind(campaign, playerCharacter);
+            addPC();
+            addPC.should.throw();
+
+            campaign.getPlayerCharacters().length.should.equal(1);
+        });
     });
 });
 

@@ -11,8 +11,10 @@ var Campaign = (function() {
 
         this.isRunning = isRunning.bind(this, privateVars);
         this.endCampaign = endCampaign.bind(this, privateVars);
+
         this.getPlayerCharacters = getPlayerCharacters.bind(this, privateVars);
         this.addPlayerCharacter = addPlayerCharacter.bind(this, privateVars);
+        this.hasPlayerCharacter = hasPlayerCharacter.bind(this, privateVars);
     }
 
     // Methods Using Private Variables
@@ -29,7 +31,15 @@ var Campaign = (function() {
     }
 
     function addPlayerCharacter(p, playerCharacter) {
+        if (this.hasPlayerCharacter(playerCharacter)) {
+            throw new Error("This player is already in the campaign.");
+        }
+
         p.playerCharacters.push(playerCharacter);
+    }
+
+    function hasPlayerCharacter(p, playerCharacter) {
+        return p.playerCharacters.indexOf(playerCharacter) >= 0;
     }
 
 
