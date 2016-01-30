@@ -38,6 +38,18 @@ PlayerCharacter = (function() {
         return this.__data__.statusEffects;
     };
 
+    PlayerCharacter.prototype.hasStatusEffect = function(target){
+        //for (var statusEffect in this.getStatusEffects()) {
+        var effects = this.getStatusEffects();
+        for (var i=0; i < effects.length; i++) {
+            if (effects[i].equals(target)) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
     // Private Functions
     function validatePlayerCharacterData(data) {
         var validData = {};

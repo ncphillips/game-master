@@ -21,15 +21,14 @@ describe("PlayerCharacters", function() {
         });
     });
 
-    describe("adding status effects to a player", function(){
+    describe("adding status effects ", function(){
         it("should add the effect to the player", function(){
             var playerCharacter = new PlayerCharacter(data);
             var statusEffect = new StatusEffect();
 
             playerCharacter.addStatusEffect(statusEffect);
 
-            playerCharacter.getStatusEffects().length.should.equal(1);
-
+            playerCharacter.hasStatusEffect(statusEffect).should.be.true();
         });
     });
 
