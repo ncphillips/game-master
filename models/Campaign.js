@@ -32,7 +32,7 @@ var Campaign = (function() {
 
     function addPlayerCharacter(p, playerCharacter) {
         if (this.hasPlayerCharacter(playerCharacter)) {
-            throw new Error("This player is already in the campaign.");
+            throw new Error("This Player Character is already in the campaign.");
         }
 
         p.playerCharacters.push(playerCharacter);

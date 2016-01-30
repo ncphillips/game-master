@@ -57,24 +57,23 @@ describe("Campaign", function() {
     });
 
     describe("adding player characters", function() {
-        it("should have one player character", function() {
+        it("should have the new player character", function() {
             var campaign = Campaign.create(campaignName);
             var playerCharacter = PlayerCharacter.create("Thorgon");
 
             campaign.addPlayerCharacter(playerCharacter);
 
-            campaign.getPlayerCharacters().length.should.equal(1);
+            campaign.hasPlayerCharacter(playerCharacter).should.be.true();
         });
 
         it("should not be able to add the player a second time", function() {
             var campaign = Campaign.create(campaignName);
             var playerCharacter = PlayerCharacter.create("Thorgon");
-
             var addPC = campaign.addPlayerCharacter.bind(campaign, playerCharacter);
-            addPC();
-            addPC.should.throw();
 
-            campaign.getPlayerCharacters().length.should.equal(1);
+            addPC();
+
+            addPC.should.throw();
         });
     });
 });
