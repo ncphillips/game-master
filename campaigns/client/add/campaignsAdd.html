@@ -1,0 +1,31 @@
+<template name="campaignsAdd">
+    {{> breadcrumbs crumbs}}
+    <h1>Add Campaign</h1>
+    <form class="new-campaign">
+        <div class="control-group">
+            <div class="col-sm-2">
+                <label for="name">Name</label>
+            </div>
+            <div class="col-sm-10">
+                <input type="text" id="name" class="form-control"/>
+            </div>
+        </div>
+        <br/>
+        <div class="control-group">
+            <div class="col-sm-2">
+                <label for="description">Description</label>
+            </div>
+            <div class="col-sm-10">
+                <textarea id="description" class="form-control"></textarea>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="control-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <input class="btn btn-primary form-control" type="submit" value="Save"/>
+            </div>
+        </div>
+    </form>
+</template>

@@ -11,6 +11,9 @@ campaigns = new CampaignCollection({
     },
     findById: function(id){
         return _db.campaigns.findOne(id);
+    },
+    findAll: function(){
+        return _db.campaigns.find({}).fetch();
     }
 
 });

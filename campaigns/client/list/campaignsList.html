@@ -1,0 +1,26 @@
+<template name="campaignsList">
+    <h1>
+        Campaigns
+    </h1>
+    {{#linkTo route="campaignsAdd"}}
+        <span class="btn btn-primary add-campaign">Add Campaign</span>
+    {{/linkTo}}
+    <table class="table table-striped" >
+        <thead>
+        <tr>
+            <th>
+                Name:
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each campaigns}}
+            <tr class="campaign-row">
+                <td>
+                    {{name}}
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>
