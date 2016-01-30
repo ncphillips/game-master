@@ -5,11 +5,13 @@ var Campaign = require("../models/Campaign");
 var PlayerCharacter = require("../models/PlayerCharacter");
 
 describe("Campaign", function() {
-    var campaignName = "Hoard of the Dragon Queen";
+    var campaignData = {
+        "name": "Hoard of the Dragon Queen"
+    };
 
     describe("new campaigns", function() {
         it("should exist", function() {
-            var campaign = new Campaign(campaignName);
+            var campaign = new Campaign(campaignData);
 
             should.exist(campaign);
         });
@@ -19,19 +21,19 @@ describe("Campaign", function() {
         });
 
         it("should set the name from the input value", function() {
-            var campaign = new Campaign(campaignName);
+            var campaign = new Campaign(campaignData);
 
-            campaign.name.should.equal(campaignName);
+            campaign.name.should.equal(campaignData.name);
         });
 
         it("should be running", function() {
-            var campaign = new Campaign(campaignName);
+            var campaign = new Campaign(campaignData);
 
             campaign.isRunning().should.be.true();
         });
 
         it("should have no player characters", function() {
-            var campaign = new Campaign(campaignName);
+            var campaign = new Campaign(campaignData);
 
             campaign.getPlayerCharacters().length.should.equal(0);
         });
@@ -39,7 +41,7 @@ describe("Campaign", function() {
 
     describe("ending campaigns", function() {
         it("should no longer be running", function() {
-            var campaign = new Campaign(campaignName);
+            var campaign = new Campaign(campaignData);
 
             campaign.endCampaign();
 
@@ -47,7 +49,7 @@ describe("Campaign", function() {
         });
 
         it("should be idempotent", function() {
-            var campaign = new Campaign(campaignName);
+            var campaign = new Campaign(campaignData);
 
             campaign.endCampaign();
             campaign.endCampaign();
@@ -58,7 +60,7 @@ describe("Campaign", function() {
 
     describe("adding player characters", function() {
         it("should have the new player character", function() {
-            var campaign = new Campaign(campaignName);
+            var campaign = new Campaign(campaignData);
             var playerCharacter = new PlayerCharacter("Thorgon");
 
             campaign.addPlayerCharacter(playerCharacter);
@@ -67,7 +69,7 @@ describe("Campaign", function() {
         });
 
         it("should not be able to add the player a second time", function() {
-            var campaign = new Campaign(campaignName);
+            var campaign = new Campaign(campaignData);
             var playerCharacter = new PlayerCharacter("Thorgon");
             var addPC = campaign.addPlayerCharacter.bind(campaign, playerCharacter);
 

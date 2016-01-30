@@ -3,6 +3,7 @@ var CampaignCollection = require("../collections/CampaignCollection");
 var Campaign = require("../models/Campaign");
 
 describe("CampaignCollection", function() {
+    var campaignData = {"name": "Test Campaign"};
     describe("saving campaigns", function(){
         it("should not accept non-Campaign objects", function(){
             var badInputs = [null, undefined, "", {}, 1, 1.2, -1, [], function() {}];
@@ -13,13 +14,13 @@ describe("CampaignCollection", function() {
         });
 
         it("should be okay with Campaign objects", function(){
-            var campaign = new Campaign("Test Campaign");
+            var campaign = new Campaign(campaignData);
 
             CampaignCollection.save.bind(null, campaign).should.not.throw();
         });
 
         it("should give the campaign an id", function(){
-            var campaign = new Campaign("Test Campaign");
+            var campaign = new Campaign(campaignData);
 
             campaign = CampaignCollection.save(campaign);
 
@@ -28,6 +29,14 @@ describe("CampaignCollection", function() {
     });
 
     describe("retrieving campaigns by id", function(){
+        it("should return campaign with the given id", function(){
+            var campaign = new Campaign(campaignData);
+            campaign = CampaignCollection.save(campaign);
+
+            var retrievedCampaign = CampaignCollection.findById(campaign.getId());
+
+            retrievedCampaign.getId().should.equal(campaign.getId());
+        });
     });
 
 });
