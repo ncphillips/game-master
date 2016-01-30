@@ -33,7 +33,9 @@ describe("PlayerCharacters", function() {
 
         it("should add a second copy of a stackable effect", function(){
             var playerCharacter = new PlayerCharacter(data);
-            var statusEffect = new StatusEffect({stackable: true});
+            var statusEffect = new StatusEffect();
+            statusEffect.setName("Test Effect");
+            statusEffect.setStackable(true);
 
             playerCharacter.addStatusEffect(statusEffect);
             playerCharacter.addStatusEffect(statusEffect);
@@ -43,7 +45,9 @@ describe("PlayerCharacters", function() {
 
         it("should not add a second copy of a non-stackable effect", function(){
             var playerCharacter = new PlayerCharacter(data);
-            var statusEffect = new StatusEffect({stackable: false});
+            var statusEffect = new StatusEffect();
+            statusEffect.setName("Test Effect");
+            statusEffect.setStackable(false);
 
             playerCharacter.addStatusEffect(statusEffect);
             playerCharacter.addStatusEffect(statusEffect);

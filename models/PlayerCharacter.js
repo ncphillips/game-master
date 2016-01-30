@@ -30,7 +30,7 @@ PlayerCharacter = (function() {
     };
 
     PlayerCharacter.prototype.addStatusEffect = function(statusEffect){
-        if (this.hasStatusEffect(statusEffect) && !statusEffect.canStack()) {
+        if (this.hasStatusEffect(statusEffect) && !statusEffect.isStackable()) {
             return;
         }
         this.__data__.statusEffects.push(statusEffect);

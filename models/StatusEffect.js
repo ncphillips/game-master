@@ -9,7 +9,19 @@ StatusEffect = (function(){
         this.roundsLeft = this.rounds;
     }
 
-    StatusEffect.prototype.canStack = function(){
+    StatusEffect.prototype.setName = function(name){
+        this.name = name;
+    };
+
+    StatusEffect.prototype.getName = function(){
+        return this.name;
+    };
+
+    StatusEffect.prototype.setStackable = function(isStackable){
+        this.stackable = isStackable;
+    };
+
+    StatusEffect.prototype.isStackable = function(){
         return this.stackable;
     };
 
@@ -18,7 +30,7 @@ StatusEffect = (function(){
             return false;
         }
 
-        return this.name === o.name;
+        return this.getName() === o.getName();
     };
 
     return StatusEffect;
