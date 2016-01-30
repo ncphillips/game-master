@@ -29,6 +29,14 @@ PlayerCharacter = (function() {
         return this.__data__.name;
     };
 
+    PlayerCharacter.prototype.addStatusEffect = function(){
+
+    };
+
+    PlayerCharacter.prototype.hasStatusEffect = function(statusEffect){
+        return true;
+    };
+
     // Private Functions
     function validatePlayerCharacterData(data) {
         var validData = {};
