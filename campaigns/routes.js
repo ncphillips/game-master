@@ -14,7 +14,7 @@ Router.route("/campaigns/:campaignId", {
     name: "campaignsView",
     data: function () {
         return {
-            campaign: Campaigns.find(this.params.campaignId).fetch()[0]
+            campaign: campaigns.findById(this.params.campaignId)
         };
     }
 });

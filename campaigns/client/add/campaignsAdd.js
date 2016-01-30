@@ -10,16 +10,13 @@ Template.campaignsAdd.events({
     "submit .new-campaign": function (event) {
         event.preventDefault();
 
-        var campaign = {
+        var campaign = new Campaign({
             name: $("#name").val(),
-            status: "Running", // Hiatus, Done
-            description: $("#description").val(),
-            creator: Meteor.userId(),
-            dungeonMaster: Meteor.userId(),
-            players: []
-        };
+            description: $("#description").val()
+        });
 
-        var id = Campaigns.insert(campaign);
-        Router.go("campaignsList");
+        campaigns.save(campaign, function(_id){
+            Router.go("campaignsView", {campaignId: _id});
+        });
     }
 });
