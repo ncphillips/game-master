@@ -37,6 +37,10 @@ describe("CampaignCollection", function() {
 
             retrievedCampaign.getId().should.equal(campaign.getId());
         });
+
+        it("should throw an error if there is no campaign with that id", function(){
+            (function() { CampaignCollection.findById(null);}).should.throw("No such Campaign exists");
+        });
     });
 
 });

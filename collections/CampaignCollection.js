@@ -24,6 +24,11 @@ CampaignCollection = (function(){
 
     function findById(id) {
         var data = fake_database[id];
+
+        if (!data) {
+            throw new Error("No such Campaign exists");
+        }
+
         return new Campaign(data);
     }
 
