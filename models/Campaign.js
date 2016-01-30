@@ -15,7 +15,10 @@ Campaign = (function() {
         };
     }
 
-    // Methods Using Private Variables
+    Campaign.prototype.getId = function(){
+        return this.__data__._id;
+    };
+
     Campaign.prototype.isRunning = function () {
         return this.__data__.isRunning;
     };

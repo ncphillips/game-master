@@ -7,6 +7,10 @@ CampaignCollection = (function(){
             if (!Campaign.prototype.isPrototypeOf(campaign)) {
                 throw new Error("This object is not a Campaign");
             }
+
+            campaign.__data__._id = 12;
+
+            return campaign;
         }
     };
 
