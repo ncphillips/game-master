@@ -1,5 +1,5 @@
 var should = require("should");
-var Encounter = require("../../models/Encounter");
+var Encounter = require("../../lib/models/Encounter");
 
 describe("Encounter", function(){
 

@@ -1,6 +1,6 @@
 var should = require("should");
-var CampaignCollection = require("../../collections/MockCampaignCollection");
-var Campaign = require("../../models/Campaign");
+var CampaignCollection = require("../../lib/collections/MockCampaignCollection");
+var Campaign = require("../../lib/models/Campaign");
 
 describe("CampaignCollection", function() {
     var campaignData = {"name": "Test Campaign"};

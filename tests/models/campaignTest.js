@@ -1,8 +1,8 @@
 "use strict";
 
 var should = require("should");
-var Campaign = require("../../models/Campaign");
-var PlayerCharacter = require("../../models/PlayerCharacter");
+var Campaign = require("../../lib/models/Campaign");
+var PlayerCharacter = require("../../lib/models/PlayerCharacter");
 
 describe("Campaign", function() {
     var campaignData = {
