@@ -47,9 +47,17 @@ var Campaign = (function() {
 
 
         var privateVars = { isRunning: true };
-        this.isRunning = function() { return privateVars.isRunning; };
-        this.endCampaign = function() { privateVars.isRunning = false; };
+        this.isRunning = isRunning.bind(this, privateVars);
+        this.endCampaign = endCampaign.bind(this, privateVars);
+    }
 
+    // Methods Using Private Variables
+    function isRunning(privateVars) {
+        return privateVars.isRunning;
+    }
+
+    function endCampaign(privateVars) {
+        privateVars.isRunning = false;
     }
 
     // Static Methods
@@ -60,7 +68,7 @@ var Campaign = (function() {
         return new Campaign(name);
     }
 
-    // API
+    // Static API
     return {
         create: createCampaign
     };
