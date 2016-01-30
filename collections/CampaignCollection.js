@@ -3,7 +3,11 @@ CampaignCollection = (function(){
     "use strict";
 
     var CampaignCollection = {
-
+        save: function (campaign) {
+            if (!Campaign.prototype.isPrototypeOf(campaign)) {
+                throw new Error("This object is not a Campaign");
+            }
+        }
     };
 
     return CampaignCollection
