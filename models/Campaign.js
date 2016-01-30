@@ -3,44 +3,36 @@ var Campaign = (function() {
     function Campaign(name) {
         this.name = name;
 
-
-        var privateVars = {
+        this.__data__ = {
             isRunning: true,
             playerCharacters: []
         };
-
-        this.isRunning = isRunning.bind(this, privateVars);
-        this.endCampaign = endCampaign.bind(this, privateVars);
-
-        this.getPlayerCharacters = getPlayerCharacters.bind(this, privateVars);
-        this.addPlayerCharacter = addPlayerCharacter.bind(this, privateVars);
-        this.hasPlayerCharacter = hasPlayerCharacter.bind(this, privateVars);
     }
 
     // Methods Using Private Variables
-    function isRunning(p) {
-        return p.isRunning;
-    }
+    Campaign.prototype.isRunning = function () {
+        return this.__data__.isRunning;
+    };
 
-    function endCampaign(p) {
-        p.isRunning = false;
-    }
+    Campaign.prototype.endCampaign = function () {
+        this.__data__.isRunning = false;
+    };
 
-    function getPlayerCharacters(p) {
-        return p.playerCharacters;
-    }
+    Campaign.prototype.getPlayerCharacters = function () {
+        return this.__data__.playerCharacters;
+    };
 
-    function addPlayerCharacter(p, playerCharacter) {
+    Campaign.prototype.addPlayerCharacter = function (playerCharacter) {
         if (this.hasPlayerCharacter(playerCharacter)) {
             throw new Error("This Player Character is already in the campaign.");
         }
 
-        p.playerCharacters.push(playerCharacter);
-    }
+        this.__data__.playerCharacters.push(playerCharacter);
+    };
 
-    function hasPlayerCharacter(p, playerCharacter) {
-        return p.playerCharacters.indexOf(playerCharacter) >= 0;
-    }
+    Campaign.prototype.hasPlayerCharacter = function (playerCharacter) {
+        return this.__data__.playerCharacters.indexOf(playerCharacter) >= 0;
+    };
 
 
     // Static Methods
