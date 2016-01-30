@@ -1,0 +1,12 @@
+<template name="breadcrumbs">
+    <br/>
+    <ol class="breadcrumb">
+        {{#each breadcrumbs}}
+            <li>
+                {{#linkTo route=name data=data}}
+                    {{text}}
+                {{/linkTo}}
+            </li>
+        {{/each}}
+    </ol>
+</template>
