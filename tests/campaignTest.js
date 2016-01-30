@@ -1,6 +1,8 @@
 "use strict";
 
 var should = require("should");
+var Campaign = require("../models/Campaign");
+var PlayerCharacter = require("../models/PlayerCharacter");
 
 describe("Campaign", function() {
     var campaignName = "Hoard of the Dragon Queen";
@@ -53,45 +55,19 @@ describe("Campaign", function() {
             campaign.isRunning().should.be.false();
         });
     });
+
+    describe("adding player characters", function() {
+        it("should have one player character", function() {
+            var campaign = Campaign.create(campaignName);
+            var playerCharacter = PlayerCharacter.create("Thorgon");
+
+            campaign.addPlayerCharacter(playerCharacter);
+
+            campaign.getPlayerCharacters().length.should.equal(1);
+        });
+    });
 });
 
-var Campaign = (function() {
-    // Constructor
-    function Campaign(name) {
-        this.name = name;
 
-
-        var privateVars = { isRunning: true };
-        this.isRunning = isRunning.bind(this, privateVars);
-        this.endCampaign = endCampaign.bind(this, privateVars);
-        this.getPlayerCharacters = getPlayerCharacters.bind(this, privateVars);
-    }
-
-    // Methods Using Private Variables
-    function isRunning(privateVars) {
-        return privateVars.isRunning;
-    }
-
-    function endCampaign(privateVars) {
-        privateVars.isRunning = false;
-    }
-
-    function getPlayerCharacters() {
-        return [];
-    }
-
-    // Static Methods
-    function createCampaign(name) {
-        if (!name)
-            throw new Error("A campaign must have a name");
-
-        return new Campaign(name);
-    }
-
-    // Static API
-    return {
-        create: createCampaign
-    };
-})();
 
 
