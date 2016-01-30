@@ -8,7 +8,7 @@ describe("PlayerCharacters", function() {
     describe("new characters", function() {
        it("should have a name", function() {
            var data = { "name": "Thorgon" };
-           var playerCharacter = PlayerCharacter.create(data);
+           var playerCharacter = new PlayerCharacter(data);
 
            playerCharacter.getName().should.equal(data.name);
        });

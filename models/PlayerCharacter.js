@@ -141,11 +141,7 @@ var PlayerCharacter = (function() {
         return validData;
     }
 
-    return {
-        create: function(data) {
-            return new PlayerCharacter(data);
-        }
-    }
+    return PlayerCharacter;
 })();
 
 if (module) {
