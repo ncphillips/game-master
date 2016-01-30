@@ -30,6 +30,26 @@ describe("PlayerCharacters", function() {
 
             playerCharacter.hasStatusEffect(statusEffect).should.be.true();
         });
+
+        it("should add a second copy of a stackable effect", function(){
+            var playerCharacter = new PlayerCharacter(data);
+            var statusEffect = new StatusEffect({stackable: true});
+
+            playerCharacter.addStatusEffect(statusEffect);
+            playerCharacter.addStatusEffect(statusEffect);
+
+            playerCharacter.getStatusEffects().length.should.equal(2);
+        });
+
+        it("should not add a second copy of a non-stackable effect", function(){
+            var playerCharacter = new PlayerCharacter(data);
+            var statusEffect = new StatusEffect({stackable: false});
+
+            playerCharacter.addStatusEffect(statusEffect);
+            playerCharacter.addStatusEffect(statusEffect);
+
+            playerCharacter.getStatusEffects().length.should.equal(1);
+        })
     });
 
 });

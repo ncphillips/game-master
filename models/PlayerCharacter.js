@@ -30,6 +30,9 @@ PlayerCharacter = (function() {
     };
 
     PlayerCharacter.prototype.addStatusEffect = function(statusEffect){
+        if (this.hasStatusEffect(statusEffect) && !statusEffect.canStack()) {
+            return;
+        }
         this.__data__.statusEffects.push(statusEffect);
 
     };
