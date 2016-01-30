@@ -27,6 +27,12 @@ describe("Campaign", function() {
 
             campaign.isRunning().should.be.true();
         });
+
+        it("should have no player characters", function() {
+            var campaign = Campaign.create(campaignName);
+
+            campaign.getPlayerCharacters().length.should.equal(0);
+        });
     });
 
     describe("ending campaigns", function() {
@@ -58,6 +64,7 @@ var Campaign = (function() {
         var privateVars = { isRunning: true };
         this.isRunning = isRunning.bind(this, privateVars);
         this.endCampaign = endCampaign.bind(this, privateVars);
+        this.getPlayerCharacters = getPlayerCharacters.bind(this, privateVars);
     }
 
     // Methods Using Private Variables
@@ -67,6 +74,10 @@ var Campaign = (function() {
 
     function endCampaign(privateVars) {
         privateVars.isRunning = false;
+    }
+
+    function getPlayerCharacters() {
+        return [];
     }
 
     // Static Methods
