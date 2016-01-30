@@ -37,6 +37,15 @@ describe("Campaign", function() {
 
             campaign.isRunning().should.be.false();
         });
+
+        it("should be idempotent", function() {
+            var campaign = Campaign.create(campaignName);
+
+            campaign.endCampaign();
+            campaign.endCampaign();
+
+            campaign.isRunning().should.be.false();
+        });
     });
 });
 
