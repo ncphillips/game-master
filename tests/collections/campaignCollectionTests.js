@@ -17,7 +17,7 @@ describe("CampaignCollection", function() {
 
             if (callback) callback(data._id);
         },
-        findOne: function(id){
+        findById: function(id){
             return this.rows[id];
         },
         findAll: function(){
