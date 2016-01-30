@@ -3,8 +3,28 @@ var CampaignCollection = require("../../lib/collections/CampaignCollection");
 var Campaign = require("../../lib/models/Campaign");
 
 describe("CampaignCollection", function() {
+    var fake_database = {
+        rows: {},
+        nextId: 0,
+        insert: function(data, callback) {
+            data._id = this.nextId++;
+            this.rows[data._id] = data;
+
+            if (callback) callback(data._id);
+        },
+        update: function (id, data, callback) {
+            this.rows[id] = data;
+
+            if (callback) callback(data._id);
+        },
+        findOne: function(id){
+            return this.rows[id];
+        }
+    };
+
     var campaignData = {"name": "Test Campaign"};
-    var campaignCollection = new CampaignCollection();
+    var campaignCollection = new CampaignCollection(fake_database);
+
     describe("saving campaigns", function(){
         it("should not accept non-Campaign objects", function(){
             var badInputs = [null, undefined, "", {}, 1, 1.2, -1, [], function() {}];
