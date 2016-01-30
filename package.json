@@ -1,0 +1,26 @@
+{
+	"name": "gamemaster",
+	"version": "0.0.1",
+	"description": "Streamlining D&D Sessions",
+	"homepage": "",
+	"keywords": "",
+	"bugs": {
+		"url": "",
+		"email": ""
+	},
+	"people": [
+		{
+			"name": "Nolan Phillips",		
+			"email": "ncphillips.19@gmail.com"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ncphillips/GameMaster.git"
+	},
+	"dependencies": {
+	},
+	"devDependencies": {
+		"should": "*"
+	}
+}
