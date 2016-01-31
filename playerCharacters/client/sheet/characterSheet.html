@@ -1,6 +1,6 @@
 <template name="characterSheet">
-    <h1>{{ name }}</h1>
-    {{#if size}}<div class="col-xs-4"><b>Size:</b></div><div class="col-xs-8">{{sizeText size}}</div>{{/if}}
+    <h1>Player Character: {{ getName }}</h1>
+    {{#if getSize}}<div class="col-xs-4"><b>Size:</b></div><div class="col-xs-8">{{sizeText getSize}}</div>{{/if}}
     {{#if ac}}<div class="col-xs-4"><b>Armor Class:</b></div><div class="col-xs-8">{{ac}}</div>{{/if}}
     {{#if hp}}<div class="col-xs-4"><b>Hit Points:</b></div><div class="col-xs-8">{{hp}} ({{hd}})</div>{{/if}}
     {{#if speed.walk}}<div class="col-xs-4"><b>Speed:</b></div><div class="col-xs-8">{{speed.walk}}</div>{{/if}}
@@ -8,7 +8,7 @@
     {{#if speed.climb}}<div class="col-xs-4"><b>Climb:</b></div><div class="col-xs-8"> {{speed.climb}}</div>{{/if}}
     {{#if speed.fly}}<div class="col-xs-4"><b>Fly:</b></div><div class="col-xs-8"> {{speed.fly}}</div>{{/if}}
     {{#if speed.swim}}<div class="col-xs-4"><b>Swim:</b></div><div class="col-xs-8"> {{speed.swim}}</div>{{/if}}
-    {{#if abilities}}
+    {{#if getAbilities}}
         <div class="col-xs-12">
             <h4>Ability Scores</h4>
             <table class="table table-condensed">
@@ -24,19 +24,19 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>{{abilities.str}} ({{abilityBonus abilities.str}})</td>
-                    <td>{{abilities.dex}} ({{abilityBonus abilities.dex}})</td>
-                    <td>{{abilities.con}} ({{abilityBonus abilities.con}})</td>
-                    <td>{{abilities.int}} ({{abilityBonus abilities.int}})</td>
-                    <td>{{abilities.wis}} ({{abilityBonus abilities.wis}})</td>
-                    <td>{{abilities.cha}} ({{abilityBonus abilities.cha}})</td>
+                    <td>{{getAbilities.str}} ({{abilityBonus getAbilities.str}})</td>
+                    <td>{{getAbilities.dex}} ({{abilityBonus getAbilities.dex}})</td>
+                    <td>{{getAbilities.con}} ({{abilityBonus getAbilities.con}})</td>
+                    <td>{{getAbilities.int}} ({{abilityBonus getAbilities.int}})</td>
+                    <td>{{getAbilities.wis}} ({{abilityBonus getAbilities.wis}})</td>
+                    <td>{{getAbilities.cha}} ({{abilityBonus getAbilities.cha}})</td>
                 </tr>
                 </tbody>
             </table>
         </div>
     {{/if}}
     <div class="col-xs-12">
-        {{#if savingThrows}}
+        {{#if getSavingThrows}}
             <div>
                 <h4>Saving Throws</h4>
                 <table class="table table-condensed">
@@ -52,12 +52,12 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{savingThrows.str}}</td>
-                        <td>{{savingThrows.dex}}</td>
-                        <td>{{savingThrows.con}}</td>
-                        <td>{{savingThrows.int}}</td>
-                        <td>{{savingThrows.wis}}</td>
-                        <td>{{savingThrows.cha}}</td>
+                        <td>{{getSavingThrows.str}}</td>
+                        <td>{{getSavingThrows.dex}}</td>
+                        <td>{{getSavingThrows.con}}</td>
+                        <td>{{getSavingThrows.int}}</td>
+                        <td>{{getSavingThrows.wis}}</td>
+                        <td>{{getSavingThrows.cha}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -66,7 +66,7 @@
     </div>
     <div class="col-xs-12">
         <h4>Actions</h4>
-        {{#each actions}}
+        {{#each getActions}}
             <h5>{{name}}</h5>
             <p>{{text}}</p>
         {{/each}}
@@ -76,7 +76,7 @@
         <div class="row">
             {{#if languages}}
                 <div class="col-xs-3"><b>Languages:</b></div>
-                <div class="col-xs-9">{{languageList languages}}</div>
+                <div class="col-xs-9">{{languageList getLanguages}}</div>
             {{/if}}
 
             {{#if cr}}
@@ -84,15 +84,15 @@
                 <div class="col-xs-9">{{cr}}</div>
             {{/if}}
 
-            {{# if damageAdjustments.resistance}}
+            {{# if getDamageAdjustments.resistance}}
                 <div class="col-xs-3"><b>Damage Resistances</b></div>
-                <div class="col-xs-9">{{damageAdjustments.resistance}}</div>
+                <div class="col-xs-9">{{getDamageAdjustments.resistance}}</div>
             {{/if}}
 
-            {{# if damageAdjustments.immunities}}
+            {{# if getDamageAdjustments.immunities}}
                 <div class="row">
                     <div class="col-xs-3"><b>Damage Immunities</b></div>
-                    <div class="col-xs-9">{{damageAdjustments.immunities}}</div>
+                    <div class="col-xs-9">{{getDamageAdjustments.immunities}}</div>
                 </div>
             {{/if}}
         </div>
@@ -100,33 +100,32 @@
         <h4>Senses</h4>
         <div class="row">
             <div class="col-xs-3">Passive:</div>
-            <div class="col-xs-9">{{senses.passive}}</div>
+            <div class="col-xs-9">{{getSenses.passive}}</div>
         </div>
-        {{#if senses.darkvision}}
+        {{#if getSenses.darkvision}}
             <div class="row">
                 <div class="col-xs-3">Darkvision:</div>
-                <div class="col-xs-9">{{senses.darkvision}} feet</div>
+                <div class="col-xs-9">{{getSenses.darkvision}} feet</div>
             </div>
         {{/if}}
-        {{#if senses.tremorsense}}
+        {{#if getSenses.tremorsense}}
             <div class="row">
                 <div class="col-xs-3">Tremorsense:</div>
-                <div class="col-xs-9">{{senses.tremorsense}} feet</div>
+                <div class="col-xs-9">{{getSenses.tremorsense}} feet</div>
             </div>
         {{/if}}
-        {{#if senses.blindsight}}
+        {{#if getSenses.blindsight}}
             <div class="row">
                 <div class="col-xs-3">Blindsight:</div>
-                <div class="col-xs-9">{{senses.blindsight}} feet</div>
+                <div class="col-xs-9">{{getSenses.blindsight}} feet</div>
             </div>
         {{/if}}
-        {{#if senses.truesight}}
+        {{#if getSenses.truesight}}
             <div class="row">
 
                 <div class="col-xs-3">Truesight:</div>
-                <div class="col-xs-9">{{senses.truesight}} feet</div>
+                <div class="col-xs-9">{{getSenses.truesight}} feet</div>
             </div>
         {{/if}}
     </div>
-
 </template>

@@ -22,7 +22,7 @@ Router.route("/campaigns/:campaignId/playerCharacters/:playerCharacterId", {
     data: function(){
         return {
             campaign: CampaignCollection.findById(this.params.campaignId),
-            playerCharacters: PlayerCharacterCollection.findById(this.params.playerCharacterId)
+            playerCharacter: PlayerCharacterCollection.findById(this.params.playerCharacterId)
         };
     }
 });
