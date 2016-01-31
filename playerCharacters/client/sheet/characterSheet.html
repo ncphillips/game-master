@@ -1,0 +1,132 @@
+<template name="characterSheet">
+    <h1>{{ name }}</h1>
+    {{#if size}}<div class="col-xs-4"><b>Size:</b></div><div class="col-xs-8">{{sizeText size}}</div>{{/if}}
+    {{#if ac}}<div class="col-xs-4"><b>Armor Class:</b></div><div class="col-xs-8">{{ac}}</div>{{/if}}
+    {{#if hp}}<div class="col-xs-4"><b>Hit Points:</b></div><div class="col-xs-8">{{hp}} ({{hd}})</div>{{/if}}
+    {{#if speed.walk}}<div class="col-xs-4"><b>Speed:</b></div><div class="col-xs-8">{{speed.walk}}</div>{{/if}}
+    {{#if speed.burrow}}<div class="col-xs-4"><b>Burrow:</b></div><div class="col-xs-8"> {{speed.burrow}}</div>{{/if}}
+    {{#if speed.climb}}<div class="col-xs-4"><b>Climb:</b></div><div class="col-xs-8"> {{speed.climb}}</div>{{/if}}
+    {{#if speed.fly}}<div class="col-xs-4"><b>Fly:</b></div><div class="col-xs-8"> {{speed.fly}}</div>{{/if}}
+    {{#if speed.swim}}<div class="col-xs-4"><b>Swim:</b></div><div class="col-xs-8"> {{speed.swim}}</div>{{/if}}
+    {{#if abilities}}
+        <div class="col-xs-12">
+            <h4>Ability Scores</h4>
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>STR</th>
+                    <th>DEX</th>
+                    <th>CON</th>
+                    <th>INT</th>
+                    <th>WIS</th>
+                    <th>CHA</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{abilities.str}} ({{abilityBonus abilities.str}})</td>
+                    <td>{{abilities.dex}} ({{abilityBonus abilities.dex}})</td>
+                    <td>{{abilities.con}} ({{abilityBonus abilities.con}})</td>
+                    <td>{{abilities.int}} ({{abilityBonus abilities.int}})</td>
+                    <td>{{abilities.wis}} ({{abilityBonus abilities.wis}})</td>
+                    <td>{{abilities.cha}} ({{abilityBonus abilities.cha}})</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    {{/if}}
+    <div class="col-xs-12">
+        {{#if savingThrows}}
+            <div>
+                <h4>Saving Throws</h4>
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>STR</th>
+                        <th>DEX</th>
+                        <th>CON</th>
+                        <th>INT</th>
+                        <th>WIS</th>
+                        <th>CHA</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{savingThrows.str}}</td>
+                        <td>{{savingThrows.dex}}</td>
+                        <td>{{savingThrows.con}}</td>
+                        <td>{{savingThrows.int}}</td>
+                        <td>{{savingThrows.wis}}</td>
+                        <td>{{savingThrows.cha}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        {{/if}}
+    </div>
+    <div class="col-xs-12">
+        <h4>Actions</h4>
+        {{#each actions}}
+            <h5>{{name}}</h5>
+            <p>{{text}}</p>
+        {{/each}}
+    </div>
+    <div class="col-xs-12">
+        <h4>Other Info</h4>
+        <div class="row">
+            {{#if languages}}
+                <div class="col-xs-3"><b>Languages:</b></div>
+                <div class="col-xs-9">{{languageList languages}}</div>
+            {{/if}}
+
+            {{#if cr}}
+                <div class="col-xs-3"><b>CR:</b></div>
+                <div class="col-xs-9">{{cr}}</div>
+            {{/if}}
+
+            {{# if damageAdjustments.resistance}}
+                <div class="col-xs-3"><b>Damage Resistances</b></div>
+                <div class="col-xs-9">{{damageAdjustments.resistance}}</div>
+            {{/if}}
+
+            {{# if damageAdjustments.immunities}}
+                <div class="row">
+                    <div class="col-xs-3"><b>Damage Immunities</b></div>
+                    <div class="col-xs-9">{{damageAdjustments.immunities}}</div>
+                </div>
+            {{/if}}
+        </div>
+
+        <h4>Senses</h4>
+        <div class="row">
+            <div class="col-xs-3">Passive:</div>
+            <div class="col-xs-9">{{senses.passive}}</div>
+        </div>
+        {{#if senses.darkvision}}
+            <div class="row">
+                <div class="col-xs-3">Darkvision:</div>
+                <div class="col-xs-9">{{senses.darkvision}} feet</div>
+            </div>
+        {{/if}}
+        {{#if senses.tremorsense}}
+            <div class="row">
+                <div class="col-xs-3">Tremorsense:</div>
+                <div class="col-xs-9">{{senses.tremorsense}} feet</div>
+            </div>
+        {{/if}}
+        {{#if senses.blindsight}}
+            <div class="row">
+                <div class="col-xs-3">Blindsight:</div>
+                <div class="col-xs-9">{{senses.blindsight}} feet</div>
+            </div>
+        {{/if}}
+        {{#if senses.truesight}}
+            <div class="row">
+
+                <div class="col-xs-3">Truesight:</div>
+                <div class="col-xs-9">{{senses.truesight}} feet</div>
+            </div>
+        {{/if}}
+    </div>
+
+</template>

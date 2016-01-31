@@ -32,7 +32,7 @@ campaignMemberships = new CampaignMembershipCollection({
         return Meteor.users.find({_id: {$nin: playerIds}}).fetch();
     },
     findPlayersInCampaign: function(campaignId){
-        return _db.campaignMemberships.find().fetch().map(function(membership){
+        return _db.campaignMemberships.find({groupId: campaignId, role: "player", type: "campaign"}).fetch().map(function(membership){
             return Meteor.users.findOne(membership.userId);
         });
     },

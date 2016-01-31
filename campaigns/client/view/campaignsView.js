@@ -11,11 +11,9 @@ Template.campaignsView.helpers({
         //return Meteor.userId() === this.campaign.getDungeonMaster() || Meteor.userId() === this.campaign.getCreator();
     },
     potentialPlayers: function(){
-        if (!this.campaign) return [];
         return campaignMemberships.findPotentialPlayers(this.campaign);
     },
     players: function(){
-        if (!this.campaign) return [];
         return campaignMemberships.findPlayersInCampaign(this.campaign);
     },
     crumbs: function(){
