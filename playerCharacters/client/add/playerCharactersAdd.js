@@ -1,6 +1,6 @@
 Template.playerCharactersAdd.helpers({
     potentialPlayers: function(){
-        return campaignMemberships.findPotentialPlayers(this.campaign);
+        return CampaignCollection.findPotentialPlayers(this.campaign);
     },
     crumbs: function(){
         if (this.campaign){
@@ -77,7 +77,7 @@ Template.playerCharactersAdd.events({
             background: $("#character-background").val()
         });
 
-        playerCharacters.save(playerCharacter, function(id){
+        PlayerCharacterCollection.save(playerCharacter, function(id){
             var campaignId = Router.current().params.campaignId;
             Router.go('playerCharactersView', {campaignId: campaignId, playerCharacterId: id});
         });

@@ -3,7 +3,7 @@ Router.route("/campaigns", {
     data: function(){
         console.log("Asdfasdfafasd");
         return {
-            campaigns: campaigns.findAll()
+            campaigns: CampaignCollection.findAll()
         };
     }
 });
@@ -14,7 +14,7 @@ Router.route("/campaigns/:campaignId", {
     name: "campaignsView",
     data: function () {
         return {
-            campaign: campaigns.findById(this.params.campaignId)
+            campaign: CampaignCollection.findById(this.params.campaignId)
         };
     }
 });

@@ -15,7 +15,7 @@ Template.campaignsAdd.events({
             description: $("#description").val()
         });
 
-        campaigns.save(campaign, function(_id){
+        CampaignCollection.save(campaign, function(_id){
             Router.go("campaignsView", {campaignId: _id});
         });
     }

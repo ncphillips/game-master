@@ -1,4 +1,4 @@
-playerCharacters = new PlayerCharacterCollection({
+playerCharacters = PlayerCharacterCollection.setDatabaseConnection({
     findByCampaign: function(campaignId){
         return _db.playerCharacters.find({campaign: campaignId}).fetch();
     },

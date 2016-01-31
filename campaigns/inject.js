@@ -2,7 +2,7 @@
  * This module creates an instance of the CamapignCollection, and
  * passes in the database interface.
  */
-campaigns = new CampaignCollection({
+campaigns = CampaignCollection.setDatabaseConnection({
     insert: function(data, callback){
         Meteor.apply(CAMPAIGN_METHOD_NAMES.CREATE, [data, callback]);
     },
@@ -18,7 +18,7 @@ campaigns = new CampaignCollection({
 
 });
 
-campaignMemberships = new CampaignMembershipCollection({
+campaignMemberships = CampaignMembershipCollection.setDatabaseConnection({
     insert: function(data, callback){
         Meteor.apply(CAMPAIGN_MEMBERSHIP_METHOD_NAMES.CREATE, [data, callback]);
     },

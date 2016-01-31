@@ -11,10 +11,10 @@ Template.campaignsView.helpers({
         //return Meteor.userId() === this.campaign.getDungeonMaster() || Meteor.userId() === this.campaign.getCreator();
     },
     potentialPlayers: function(){
-        return campaignMemberships.findPotentialPlayers(this.campaign);
+        return CampaignMembershipCollection.findPotentialPlayers(this.campaign);
     },
     players: function(){
-        return campaignMemberships.findPlayersInCampaign(this.campaign);
+        return CampaignMembershipCollection.findPlayersInCampaign(this.campaign);
     },
     crumbs: function(){
         return {breadcrumbs: [
@@ -27,11 +27,11 @@ Template.campaignsView.events({
     "click .add-player": function(){
         var userId = $("#new-player").find(":selected").val();
         if (userId) {
-            campaignMemberships.registerUserAsPlayer(userId, this.campaign);
+            CampaignMembershipCollection.registerUserAsPlayer(userId, this.campaign);
         }
     },
     "click .remove-player": function(){
         var campaignId = Router.current().params.campaignId;
-        campaignMemberships.removePlayerFromCampaign(this, campaignId);
+        CampaignMembershipCollection.removePlayerFromCampaign(this, campaignId);
     }
 });
