@@ -19,16 +19,21 @@ campaigns = new CampaignCollection({
 });
 
 campaignMemberships = new CampaignMembershipCollection({
-    insert: function(){
-
+    insert: function(data, callback){
+        Meteor.apply(CAMPAIGN_MEMBERSHIP_METHOD_NAMES.CREATE, [data, callback]);
     },
     findPotentialPlayers: function(campaignId){
-        var players = [];
-        var users = Meteor.users.find({_id: {$nin: players}}).fetch();
+        var players = this.findPlayersInCampaign(campaignId);
 
-        return users;
+        var playerIds = players.map(function(player){
+            return player._id;
+        });
+
+        return Meteor.users.find({_id: {$nin: playerIds}}).fetch();
     },
     findPlayersInCampaign: function(campaignId){
-        return campaignMemberships.find({groupId: campaignId, type: "campaign"}).fetch();
+        return _db.campaignMemberships.find().fetch().map(function(membership){
+            return Meteor.users.findOne(membership.userId);
+        });
     }
 });

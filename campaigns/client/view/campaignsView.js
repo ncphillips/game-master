@@ -57,8 +57,8 @@ Template.campaignsView.helpers({
 
 Template.campaignsView.events({
     "click .add-player": function(){
-        //var newPlayer = $("#new-player").find(":selected").val();
-        //Campaigns.update(this.campaign._id, {$push: {players: newPlayer}});
+        var userId = $("#new-player").find(":selected").val();
+        campaignMemberships.registerUserAsPlayer(userId, this.campaign);
     },
     "click .remove-player": function(){
         //var campaignId = Router.current().params.campaignId;

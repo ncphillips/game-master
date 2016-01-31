@@ -25,6 +25,19 @@ CAMPAIGN_METHODS[CAMPAIGN_METHOD_NAMES.UPDATE] = function(id, data, callback){
 
 Meteor.methods(CAMPAIGN_METHODS);
 
+CAMPAIGN_MEMBERSHIP_METHOD_NAMES = { };
+CAMPAIGN_MEMBERSHIP_METHOD_NAMES.CREATE = "campaignMemberships/create";
+
+CAMPAIGN_MEMBERSHIP_METHODS = { };
+
+CAMPAIGN_MEMBERSHIP_METHODS[CAMPAIGN_MEMBERSHIP_METHOD_NAMES.CREATE] = function(data, callback){
+    data.creator = Meteor.userId();
+    data.dungeonMaster = Meteor.userId();
+
+    var _id = _db.campaignMemberships.insert(data, callback);
+    if (callback) callback(_id);
+};
 
 
+Meteor.methods(CAMPAIGN_MEMBERSHIP_METHODS);
 
