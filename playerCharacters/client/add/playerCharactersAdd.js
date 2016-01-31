@@ -1,21 +1,10 @@
 Template.playerCharactersAdd.helpers({
     potentialPlayers: function(){
-        if (!this.campaign) {
-            return [];
-        }
-
-        var users = Meteor.users.find({_id: {$in: this.campaign.players}}).fetch();
-        return users.map(function(user){
-            if (user){
-                return {email: user.emails[0].address, _id: user._id};
-            } else {
-                return {email: '', _id: ''};
-            }
-        })
+        return campaignMemberships.findPotentialPlayers(this.campaign);
     },
     crumbs: function(){
         if (this.campaign){
-            var campaignId = this.campaign._id;
+            var campaignId = this.campaign.getId();
             var text = this.campaign.name;
             return {
                 breadcrumbs: [{
@@ -44,7 +33,7 @@ Template.playerCharactersAdd.events({
 
         var urlParams = Router.current().params;
 
-        var data = {
+        var playerCharacter = new PlayerCharacter({
             name: $("#name").val(),
             player: $('#character-player :selected').val(),
             classLevel: $("#character-class-level").val(),
@@ -86,10 +75,12 @@ Template.playerCharactersAdd.events({
             campaign: urlParams.campaignId,
             description: $("#character-description").val(),
             background: $("#character-background").val()
-        };
+        });
 
-        var playerCharacter = new Character(data);
-        playerCharacter.save();
+        playerCharacters.save(playerCharacter, function(id){
+            var campaignId = Router.current().params.campaignId;
+            Router.go('playerCharactersView', {campaignId: campaignId, playerCharacterId: id});
+        });
 
     }
 });
