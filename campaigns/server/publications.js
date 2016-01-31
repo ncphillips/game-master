@@ -6,3 +6,7 @@
 Meteor.publish("campaigns", function() {
     return _db.campaigns.find();
 });
+
+Meteor.publish("campaignMemberships", function() {
+    return _db.campaignMemberships.find();
+});

@@ -5,4 +5,5 @@ if (typeof _db === 'undefined'){
     _db = {};
 }
 _db.campaigns = new Mongo.Collection("campaigns");
+_db.campaignMemberships = new Mongo.Collection("campaignMemberships");
 

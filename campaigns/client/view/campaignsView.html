@@ -22,9 +22,9 @@
         <div class="col-sm-4">
             <h2>Players</h2>
             <ul class="list-group">
-                {{#each playerEmails}}
+                {{#each players}}
                     <li class="list-group-item clearfix">
-                        {{email}}
+                        {{getEmail}}
                         <span class="btn btn-danger btn-sm remove-player pull-right">Remove</span>
                     </li>
                 {{/each}}
@@ -33,7 +33,7 @@
                 <div class="control-group">
                     <select id="new-player" class="form-control">
                         {{#each potentialPlayers}}
-                            <option value="{{_id}}">{{email}}</option>
+                            <option value="{{getId}}">{{getEmail}}</option>
                         {{/each}}
                     </select>
                 </div>

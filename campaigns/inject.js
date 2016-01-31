@@ -17,3 +17,18 @@ campaigns = new CampaignCollection({
     }
 
 });
+
+campaignMemberships = new CampaignMembershipCollection({
+    insert: function(){
+
+    },
+    findPotentialPlayers: function(campaignId){
+        var players = [];
+        var users = Meteor.users.find({_id: {$nin: players}}).fetch();
+
+        return users;
+    },
+    findPlayersInCampaign: function(campaignId){
+        return campaignMemberships.find({groupId: campaignId, type: "campaign"}).fetch();
+    }
+});

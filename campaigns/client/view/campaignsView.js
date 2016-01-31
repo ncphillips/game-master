@@ -19,25 +19,18 @@ Template.campaignsView.helpers({
         return Meteor.userId() === this.campaign.getDungeonMaster();
     },
     userIsCreatorOrDm: function(){
+        return true;
         if (!this.campaign) {
             return false;
         }
         return Meteor.userId() === this.campaign.getDungeonMaster() || Meteor.userId() === this.campaign.getCreator();
     },
     potentialPlayers: function(){
-        //if (!this.campaign) {
-        //    return [];
-        //}
-        //
-        //var players = $.merge([], this.campaign.players, [this.campaign.dungeonMaster], [this.campaign.creator]);
-        //var users = Meteor.users.find({_id: {$nin: players}}).fetch();
-        //return users.map(function(user){
-        //    if (user){
-        //        return {email: user.emails[0].address, _id: user._id};
-        //    } else {
-        //        return {email: '', _id: ''};
-        //    }
-        //})
+        if (!this.campaign) {
+            return [];
+        }
+
+        return campaignMemberships.findPotentialPlayers(this.campaign);
     },
     dmEmail: function(){
         //if (this.campaign){
@@ -47,18 +40,11 @@ Template.campaignsView.helpers({
         //    }
         //}
     },
-    playerEmails: function(){
-        //if (!this.campaign)
-        //    return [];
-        //
-        //var players = Meteor.users.find({_id: {$in: this.campaign.players}});
-        //return players.map(function(player){
-        //    if (player){
-        //        return {email: player.emails[0].address, _id: player._id};
-        //    } else{
-        //        return {};
-        //    }
-        //});
+    players: function(){
+        if (!this.campaign)
+            return [];
+
+        return campaignMemberships.findPlayersInCampaign(this.campaign);
     },
     crumbs: function(){
         var campaignId = this.campaign._id;
