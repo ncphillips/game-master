@@ -18,7 +18,6 @@ CAMPAIGN_METHODS[CAMPAIGN_METHOD_NAMES.CREATE] = function(data, callback){
 
 CAMPAIGN_METHODS[CAMPAIGN_METHOD_NAMES.UPDATE] = function(id, data, callback){
     var _id = _db.campaigns.update(id, data);
-    console.log("Updated", _id);
 
     if (callback) callback(_id);
 };

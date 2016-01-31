@@ -1,7 +1,6 @@
 Router.route("/campaigns", {
     name:"campaignsList",
     data: function(){
-        console.log("Asdfasdfafasd");
         return {
             campaigns: CampaignCollection.findAll()
         };

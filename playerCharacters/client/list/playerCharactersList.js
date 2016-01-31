@@ -15,7 +15,9 @@ Template.playerCharactersList.helpers({
 Template.playerCharactersList.events({
     "click tr": function(){
         var params = Router.current().params;
-        params.pcId = this._id;
+        console.log(this);
+        params.playerCharacterId = this.getId();
+        console.log(params);
         Router.go("playerCharactersView", params);
     }
 });
