@@ -1,0 +1,105 @@
+<template name="monstersList" xmlns="http://www.w3.org/1999/html">
+    <h1>Monster Manual</h1>
+    <form action="#" class="form form-inline">
+        <div class="control-group">
+            <label for="filter-cr">CR: </label>
+            <select id="filter-cr" class="form-control">
+                {{> monster_cr_options}}
+            </select>
+            <label for="filter-type"> Type: </label>
+            <select id="filter-type" class="form-control">
+                {{> monster_type_templates}}
+            </select>
+            <input type="submit" id="filter-monsters" class="btn btn-primary form-control" value="Filter">
+        </div>
+    </form>
+    <br/>
+    <div>
+        <div id="previous-page" class="btn btn-default pull-left">Previous</div>
+        <div style="text-align: center"><h3>Page {{pageNum}}</h3></div>
+        <div id="next-page"     class="btn btn-default pull-right">Next</div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Source</td>
+            <td>Page</td>
+            <td>Name</td>
+            <td>AC</td>
+            <td>HP</td>
+            <td>CR</td>
+            <td>Size</td>
+            <td>Type</td>
+            <td>Alignment</td>
+        </tr>
+        </thead>
+        <tbody>
+        {{# each monsters}}
+            <tr class="monster-row">
+                <td>{{source}}</td>
+                <td>{{page}}</td>
+                <td>{{name}}</td>
+                <td>{{ac}}</td>
+                <td>
+                    {{hp}}
+                    {{#if hd}}
+                        <span class="pull-right">
+                        {{hd}}
+                        </span>
+                    {{/if}}
+                </td>
+                <td>{{cr}}</td>
+                <td>{{size}}</td>
+                <td>{{type}}</td>
+                <td>{{alignment}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="monster_cr_options">
+    <option>Any</option>
+    <option>1/4</option>
+    <option>1/8</option>
+    <option>1/2</option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+    <option>6</option>
+    <option>7</option>
+    <option>8</option>
+    <option>9</option>
+    <option>10</option>
+    <option>11</option>
+    <option>12</option>
+    <option>13</option>
+    <option>14</option>
+    <option>15</option>
+    <option>17</option>
+    <option>18</option>
+    <option>19</option>
+    <option>20</option>
+</template>
+
+<template name="monster_type_templates">
+    <option>Any</option>
+    <option>Humanoid</option>
+    <option>Aberration</option>
+    <option>Celestial</option>
+    <option>Fiend</option>
+    <option>Fiend (Demon)</option>
+    <option>Fiend (Devil)</option>
+    <option>Construct</option>
+    <option>Monstrosity</option>
+    <option>Elemental</option>
+    <option>Undead</option>
+    <option>Plant</option>
+    <option>Giant</option>
+    <option>Beast</option>
+    <option>Dragon</option>
+    <option>Fey</option>
+    <option>Ooze</option>
+</template>
