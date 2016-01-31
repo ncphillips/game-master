@@ -1,6 +1,6 @@
 Template.playerCharactersAdd.helpers({
-    potentialPlayers: function(){
-        return CampaignCollection.findPotentialPlayers(this.campaign);
+    playersInCampaign: function(){
+        return CampaignMembershipCollection.findPlayersInCampaign(this.campaign);
     },
     crumbs: function(){
         if (this.campaign){

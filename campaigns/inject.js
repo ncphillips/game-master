@@ -34,6 +34,7 @@ CampaignMembershipCollection.setDatabaseConnection({
     },
     findPlayersInCampaign: function(campaignId){
         return _db.campaignMemberships.find({groupId: campaignId, role: "player", groupType: "campaign"}).fetch().map(function(membership){
+            console.log("Loading users", membership);
             return Meteor.users.findOne(membership.userId);
         });
     },

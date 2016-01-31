@@ -1,88 +1,3 @@
-<template name="playerCharactersAddOld">
-    {{> breadcrumbs crumbs}}
-    <form class="add-player-character">
-        <h1>Add Player Character</h1>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="control-group">
-                    <label for="character-player">Player</label>
-                    <select id="character-player" class="form-control">
-                        {{#each potentialPlayers}}
-                            <option value="{{_id}}">{{email}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="control-group">
-                    <label for="character-name">Name</label>
-                    <input id="character-name" type="text" value="" class="form-control"/>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="control-group">
-                    <label for="character-race">Race</label>
-                    <input id="character-race" type="text" value="" class="form-control"/>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-
-                <div class="control-group">
-                    <label for="character-class-level">Class & Level</label>
-                    <input id="character-class-level" type="text" value="" class="form-control"/>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="control-group">
-                    <label for="character-hp-max">
-                        <span class="hidden-sm">Hit Points</span>
-                        <span class="visible-sm">HP</span>
-                    </label>
-                    <input id="character-hp-max" type="number" value="0" min="0" class="form-control"/>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="control-group">
-                    <label for="character-passive-perception">
-                        <span class="hidden-sm">Passive Perception</span>
-                        <span class="visible-sm">Perception</span>
-                    </label>
-                    <input id="character-passive-perception" type="number" value="10" min="0" class="form-control"/>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 form-inline">
-
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="control-group">
-                    <label for="character-description">Description</label>
-                    <textarea id="character-description" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="control-group">
-                    <label for="character-background">Background</label>
-                    <textarea id="character-background" class="form-control"></textarea>
-                </div>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-xs-12">
-                <input type="submit" value="Save" class="btn btn-primary pull-right"/>
-            </div>
-        </div>
-    </form>
-</template>
-
-
 <template name="playerCharactersAdd">
     {{> breadcrumbs crumbs}}
     <h1>
@@ -99,8 +14,8 @@
         <div class="control-group col-xs-6">
             <label for="character-player">Player</label>
             <select id="character-player" class="form-control">
-                {{#each potentialPlayers}}
-                    <option value="{{_id}}">{{email}}</option>
+                {{#each playersInCampaign}}
+                    <option value="{{getId}}">{{getEmail}}</option>
                 {{/each}}
             </select>
         </div>
