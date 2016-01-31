@@ -32,11 +32,21 @@ CAMPAIGN_MEMBERSHIP_METHOD_NAMES.REMOVE_PLAYER_FROM_CAMPAIGN = "campaignMembersh
 CAMPAIGN_MEMBERSHIP_METHODS = { };
 
 CAMPAIGN_MEMBERSHIP_METHODS[CAMPAIGN_MEMBERSHIP_METHOD_NAMES.CREATE] = function(data, callback){
+    callback = callback || function(message) {console.log(message)};
     data.creator = Meteor.userId();
     data.dungeonMaster = Meteor.userId();
 
-    var _id = _db.campaignMemberships.insert(data, callback);
-    if (callback) callback(_id);
+    var existingMembership = _db.campaignMemberships.find({
+        groupType: "campaign",
+        groupId: data.groupId,
+        userId: data.userId
+    }).count();
+
+    if (existingMembership > 0) {
+        return callback(new Error("The User is already a Player in this Campaign."));
+    }
+
+    callback(_db.campaignMemberships.insert(data, callback));
 };
 
 CAMPAIGN_MEMBERSHIP_METHODS[CAMPAIGN_MEMBERSHIP_METHOD_NAMES.REMOVE_PLAYER_FROM_CAMPAIGN] = function(userId, campaignId, callback){

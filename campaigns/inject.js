@@ -2,7 +2,7 @@
  * This module creates an instance of the CamapignCollection, and
  * passes in the database interface.
  */
-campaigns = CampaignCollection.setDatabaseConnection({
+CampaignCollection.setDatabaseConnection({
     insert: function(data, callback){
         Meteor.apply(CAMPAIGN_METHOD_NAMES.CREATE, [data, callback]);
     },
@@ -18,8 +18,9 @@ campaigns = CampaignCollection.setDatabaseConnection({
 
 });
 
-campaignMemberships = CampaignMembershipCollection.setDatabaseConnection({
+CampaignMembershipCollection.setDatabaseConnection({
     insert: function(data, callback){
+        console.log("Creating Membership", data);
         Meteor.apply(CAMPAIGN_MEMBERSHIP_METHOD_NAMES.CREATE, [data, callback]);
     },
     findPotentialPlayers: function(campaignId){
@@ -32,7 +33,7 @@ campaignMemberships = CampaignMembershipCollection.setDatabaseConnection({
         return Meteor.users.find({_id: {$nin: playerIds}}).fetch();
     },
     findPlayersInCampaign: function(campaignId){
-        return _db.campaignMemberships.find({groupId: campaignId, role: "player", type: "campaign"}).fetch().map(function(membership){
+        return _db.campaignMemberships.find({groupId: campaignId, role: "player", groupType: "campaign"}).fetch().map(function(membership){
             return Meteor.users.findOne(membership.userId);
         });
     },
