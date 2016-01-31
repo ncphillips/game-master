@@ -35,5 +35,8 @@ campaignMemberships = new CampaignMembershipCollection({
         return _db.campaignMemberships.find().fetch().map(function(membership){
             return Meteor.users.findOne(membership.userId);
         });
+    },
+    removePlayerFromCampaign: function(userId, campaignId){
+        Meteor.apply(CAMPAIGN_MEMBERSHIP_METHOD_NAMES.REMOVE_PLAYER_FROM_CAMPAIGN, [userId, campaignId]);
     }
 });

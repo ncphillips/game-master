@@ -27,6 +27,7 @@ Meteor.methods(CAMPAIGN_METHODS);
 
 CAMPAIGN_MEMBERSHIP_METHOD_NAMES = { };
 CAMPAIGN_MEMBERSHIP_METHOD_NAMES.CREATE = "campaignMemberships/create";
+CAMPAIGN_MEMBERSHIP_METHOD_NAMES.REMOVE_PLAYER_FROM_CAMPAIGN = "campaignMemberships/removePlayerfromCampaign";
 
 CAMPAIGN_MEMBERSHIP_METHODS = { };
 
@@ -36,6 +37,11 @@ CAMPAIGN_MEMBERSHIP_METHODS[CAMPAIGN_MEMBERSHIP_METHOD_NAMES.CREATE] = function(
 
     var _id = _db.campaignMemberships.insert(data, callback);
     if (callback) callback(_id);
+};
+
+CAMPAIGN_MEMBERSHIP_METHODS[CAMPAIGN_MEMBERSHIP_METHOD_NAMES.REMOVE_PLAYER_FROM_CAMPAIGN] = function(userId, campaignId, callback){
+    _db.campaignMemberships.remove({userId: userId, groupId: campaignId, groupType: 'campaign', role: 'player'});
+    if (callback) callback();
 };
 
 
