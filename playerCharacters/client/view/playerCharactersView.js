@@ -9,7 +9,7 @@ Template.playerCharactersView.helpers({
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
             {text: text,  name: "campaignsView", data: {campaignId: campaignId}},
-            {text: "Players", name: "playerCharactersList", data: {campaignId: campaignId}}
+            {text: "Player Characters", name: "playerCharactersList", data: {campaignId: campaignId}}
         ]};
     }
 });
