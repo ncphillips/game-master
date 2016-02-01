@@ -61,7 +61,7 @@ describe("Campaign", function() {
     describe("adding player characters", function() {
         it("should have the new player character", function() {
             var campaign = new Campaign(campaignData);
-            var playerCharacter = new PlayerCharacter("Thorgon");
+            var playerCharacter = new PlayerCharacter();
 
             campaign.addPlayerCharacter(playerCharacter);
 
@@ -70,7 +70,7 @@ describe("Campaign", function() {
 
         it("should not be able to add the player a second time", function() {
             var campaign = new Campaign(campaignData);
-            var playerCharacter = new PlayerCharacter("Thorgon");
+            var playerCharacter = new PlayerCharacter();
             var addPC = campaign.addPlayerCharacter.bind(campaign, playerCharacter);
 
             addPC();

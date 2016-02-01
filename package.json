@@ -21,6 +21,7 @@
 	"dependencies": {
 	},
 	"devDependencies": {
-		"should": "*"
+		"should": "*",
+	  	"lodash": "*"
 	}
 }
