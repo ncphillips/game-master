@@ -1,5 +1,3 @@
-numPerPage = 15;
-
 Session.set("monster-query",{});
 Session.set("page", 0);
 
@@ -8,12 +6,10 @@ Template.monstersList.helpers({
         return Session.get("page") + 1;
     },
     monsters: function(){
-        var options = {
-            sort: {source: 1, page: 1},
-            limit: numPerPage,
-            skip: Session.get("page") * numPerPage
-        };
-        return MonsterTemplates.find(Session.get("monster-query"), options).fetch();
+        // Todo: Move this logic into a MonsterTemplateCollection object.
+        return monsterTemplateDbConnection.findMonsters(Session.get("monster-query"), Session.get("page")).map(function(data){
+            return new CharacterTemplate(data);
+        });
     }
 });
 

@@ -36,22 +36,22 @@
         <tbody>
         {{# each monsters}}
             <tr class="monster-row">
-                <td>{{source}}</td>
-                <td>{{page}}</td>
-                <td>{{name}}</td>
-                <td>{{ac}}</td>
+                <td>{{getSource}}</td>
+                <td>{{getPage}}</td>
+                <td>{{getName}}</td>
+                <td>{{getAc}}</td>
                 <td>
-                    {{hp}}
-                    {{#if hd}}
+                    {{getHp}}
+                    {{#if getHd}}
                         <span class="pull-right">
-                        {{hd}}
+                        {{getHd}}
                         </span>
                     {{/if}}
                 </td>
-                <td>{{cr}}</td>
-                <td>{{size}}</td>
-                <td>{{type}}</td>
-                <td>{{alignment}}</td>
+                <td>{{getCr}}</td>
+                <td>{{getSize}}</td>
+                <td>{{getType}}</td>
+                <td>{{getAlignment}}</td>
             </tr>
         {{/each}}
         </tbody>
