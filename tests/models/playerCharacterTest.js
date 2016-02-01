@@ -1,7 +1,7 @@
 "use strict";
 
 var should = require("should");
-var PlayerCharacter = require("../../lib/models/PlayerCharacter");
+var PlayerCharacter = require("../../lib/models/characters/PlayerCharacter");
 var StatusEffect = require("../../lib/models/StatusEffect");
 
 describe("PlayerCharacters", function() {

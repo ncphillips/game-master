@@ -2,7 +2,7 @@
 
 var should = require("should");
 var Campaign = require("../../lib/models/Campaign");
-var PlayerCharacter = require("../../lib/models/PlayerCharacter");
+var PlayerCharacter = require("../../lib/models/characters/PlayerCharacter");
 
 describe("Campaign", function() {
     var campaignData = {
