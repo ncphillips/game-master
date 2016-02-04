@@ -1,0 +1,103 @@
+<template name="encountersRun">
+    {{> breadcrumbs crumbs}}
+    <h1>{{encounter.name}} Initiative Order <span class="btn btn-sm btn-danger pull-right" id="end-encounter">End Encounter</span></h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Round: {{encounter.round}} <small>{{time}}</small><span id="next-turn" class="btn btn-default pull-right">Next Turn</span></h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Init</th>
+                    <th>CR</th>
+                    <th>Name</th>
+                    <th>HP</th>
+                    <th>Deal Damage</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each characters}}
+                    <tr class="{{#if isCurrentCharacter @index}}info{{/if}}">
+                        <td>
+                            <input type="number" min="0" value="{{initiative}}" class="pc-initiative form-control"/>
+                        </td>
+                        <td>{{cr}}</td>
+                        <td>
+                            {{name}}
+
+                        </td>
+                        <td>{{hp}}</td>
+                        <td class="form-inline">
+                            <input class="deal-damage form-control" type="number">
+                        </td>
+                        <td>
+                            {{#if isUnconscious hp}}
+                                <span class="label label-danger">Unconscious</span>
+                            {{/if}}
+                            {{#each statusEffects}}
+                                <p  class="status-effect" data-toggle="tooltip" data-placement="left" title="{{description}}"><b>{{name}}</b>  <i>{{rounds}}</i></p>
+                            {{/each}}
+                            <span class="btn btn-sm btn-default add-status">Add Status</span>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            {{#with currentCharacter}}
+                {{> characterSheet}}
+            {{/with}}
+        </div>
+    </div>
+
+    <div id="everyone-is-dead" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Everyone is Dead</h4>
+                </div>
+                <div class="modal-body">
+                    <p>It seems there has been a TPK. Better luck next time :P</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="add-status-effect-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add Status Effect</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Describe a new status effect.</p>
+                    <p>Note: Currently Game Master only supports status effects that end on the start of the turn of the character it is effecting..</p>
+
+                    <div class="control-group">
+                        <label for="new-status-name">Name</label>
+                        <input id="new-status-name" type="text" value="" class="form-control"/>
+                    </div>
+                    <div class="control-group">
+                        <label for="new-status-rounds"># Rounds</label>
+                        <input id="new-status-rounds" type="number" min=0 value="1" class="form-control"/>
+                    </div>
+                    <div class="control-group">
+                        <label for="new-status-description">Description</label>
+                        <textarea id="new-status-description" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary save-status">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</template>

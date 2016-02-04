@@ -1,0 +1,89 @@
+<template name="encountersView">
+    {{> breadcrumbs crumbs}}
+    <h1>{{encounter.name}}</h1>
+    <div class="row">
+        <div class="col-sm-3"><b>Description</b></div>
+        <div class="col-sm-9">{{encounter.description}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"><b>Status</b></div>
+        <div class="col-sm-9">
+            {{encounter.status}}
+            {{#if userIsDm}}
+                {{#if notStarted}}
+                    <span id="start-encounter" class="btn btn-primary pull-right">Start Encounter</span>
+                {{/if}}
+            {{/if}}
+            {{#if inProgress}}
+                <span id="view-running-encounter" class="btn btn-primary pull-right">Go to Running Encounter</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"><b>Dungeon Master</b></div>
+        <div class="col-sm-9">{{dmEmail}}</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Characters</h3>
+            <div class="list-group">
+                {{#each playerCharacters}}
+                    <div class="list-group-item clearfix">
+                        {{name}}
+                        <span class="btn btn-danger btn-sm remove-player-character pull-right">Remove</span>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="control-group">
+                <select id="new-player-character" class="form-control">
+                    {{#each potentialPlayerCharacters}}
+                        <option value="{{_id}}">{{name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <br/>
+            <div class="control-group">
+                <input type="button" class="btn btn-info btn-sm btn-block add-player-character" value="Add Player">
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <h3>Monsters</h3>
+        {{#if userIsCreatorOrDm}}
+            <div class="row">
+                <div class="control-group col-sm-4">
+                    <label for="num_monsters">Count</label>
+                    <input type="number" min="1" class="form-control" id="num-monsters" value="1"/>
+                </div>
+                <div class="control-group col-sm-4">
+                    <label for="monster-template">Monster</label>
+                    <select id="monster-name" class="form-control">
+                        {{#each monsterTemplates}}
+                            <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="control-group col-sm-4">
+                    <label></label>
+                    <input type="button" class="btn btn-primary btn-sm add-monster form-control" value="Add Monsters">
+                </div>
+            </div>
+        {{/if}}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Count</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each encounter.monsterGenerators}}
+                <tr>
+                    <td>{{count}}</td>
+                    <td>{{monsterName}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
