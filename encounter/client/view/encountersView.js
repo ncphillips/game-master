@@ -1,10 +1,7 @@
 Template.encountersView.helpers({
     dmEmail: function(){
-        if (this.campaign && this.campaign.dungeonMaster){
-            var dm = UserCollection.findById(this.campaign.dungeonMaster);
-            if(dm){
-                return dm.getEmail();
-            }
+        if (this.encounter) {
+            return this.encounter.dungeonMaster().getEmail();
         }
     },
     playerCharacters: function(){

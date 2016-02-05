@@ -9,9 +9,6 @@ ENCOUNTER_METHODS = { };
 
 ENCOUNTER_METHODS[ENCOUNTER_METHOD_NAMES.CREATE] = function(data, callback){
     delete data._id;
-    data.creator = Meteor.userId;
-    data.dungeonMaster = Meteor.userId;
-
     var _id = _db.encounters.insert(data);
     if (callback) callback(_id);
 };

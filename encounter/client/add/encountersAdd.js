@@ -15,6 +15,7 @@ Template.encountersAdd.events({
         var encounter = new Encounter({
             campaign: this.campaign.getId(),
             name: $("#name").val(),
+            dungeonMaster: Meteor.userId(),
             description: $("#description").val()
         });
 
