@@ -48,7 +48,10 @@ Template.encountersView.helpers({
 Template.encountersView.events({
     "click .remove-player-character": function(){
         var encounterId = Router.current().params.encounterId;
-        _db.encounter.update(encounterId, {$pull: {playerCharacters: this._id}});
+
+        var encounter = EncounterCollection.findById(encounterId);
+        encounter.removePlayerCharacter(this._id);
+        EncounterCollection.save(encounter);
     },
     "click .add-player-character": function(){
         var newPC = $("#new-player-character").find(":selected").val();
