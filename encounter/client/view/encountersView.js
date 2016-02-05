@@ -9,13 +9,13 @@ Template.encountersView.helpers({
     },
     playerCharacters: function(){
         if (this.encounter) {
-            return Characters.find({_id: {$in: this.encounter.playerCharacters}}).fetch();
+            return _db.playerCharacters.find({_id: {$in: this.encounter.__data__.playerCharacters || []}}).fetch();
         }
         return [];
     },
     potentialPlayerCharacters: function(){
         if (this.encounter) {
-            return Characters.find({_id: {$nin: this.encounter.playerCharacters}, campaign: this.campaign._id}).fetch();
+            return _db.playerCharacters.find({_id: {$nin: this.encounter.__data__.playerCharacters || []}, campaign: this.campaign.getId()}).fetch();
         }
         return [];
     },
@@ -27,12 +27,14 @@ Template.encountersView.helpers({
     },
     isDone: function() { return this.status === "Done"; },
     userIsDm: function(){
+        return true;
         if (!this.campaign) {
             return false;
         }
         return Meteor.userId() === this.campaign.dungeonMaster;
     },
     userIsCreatorOrDm: function(){
+        return true;
         if (!this.campaign) {
             return false;
         }
@@ -55,11 +57,11 @@ Template.encountersView.helpers({
 Template.encountersView.events({
     "click .remove-player-character": function(){
         var encounterId = Router.current().params.encounterId;
-        Encounters.update(encounterId, {$pull: {playerCharacters: this._id}});
+        _db.encounter.update(encounterId, {$pull: {playerCharacters: this._id}});
     },
     "click .add-player-character": function(){
         var newPC = $("#new-player-character").find(":selected").val();
-        Encounters.update(this.encounter._id, {$push: {playerCharacters: newPC}});
+        _db.encounters.update(this.encounter._id, {$push: {playerCharacters: newPC}});
     },
     "click .add-monster": function(){
         var count = $("#num-monsters").val();
@@ -72,12 +74,12 @@ Template.encountersView.events({
             monsterName: monster.name
         };
 
-        Encounters.update(this.encounter._id, {$push: {monsterGenerators: monsterGenerator}});
+        _db.encounters.update(this.encounter._id, {$push: {monsterGenerators: monsterGenerator}});
     },
     "click #start-encounter": function(){
         // Generate Monsters
         var characters = [];
-        this.encounter.monsterGenerators.forEach(function(generator){
+        this.encounters.monsterGenerators.forEach(function(generator){
             characters = $.merge(characters, generateMonsters(generator));
         });
 
@@ -85,7 +87,7 @@ Template.encountersView.events({
         characters = $.merge(characters, loadPlayerCharacters(this.encounter));
 
         // Update Status
-        Encounters.update(this.encounter._id, {$set: {status: "In Progress", characters: characters}});
+        _db.encounters.update(this.encounter.__data__._id, {$set: {status: "In Progress", characters: characters}});
 
         Router.go('encountersRun', Router.current().params);
     },
@@ -103,7 +105,7 @@ function rollHitDie(hd) {
 }
 
 function loadPlayerCharacters(encounter) {
-    var characters = Characters.find({_id: {$in: encounter.playerCharacters}}).fetch();
+    var characters = Characters.find({_id: {$in: encounter.__data__.playerCharacters || []}}).fetch();
     return characters.map(function(pc){
         return pc._id;
     });
