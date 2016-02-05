@@ -17,10 +17,10 @@ Template.encountersView.helpers({
         return [];
     },
     notStarted: function() {
-        return this.encounter && this.encounter.status === "Not Started";
+        return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES.NOT_STARTED;
     },
     inProgress: function() {
-        return this.encounter && this.encounter.status === "In Progress";
+        return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES.IN_PROGRESS;
     },
     isDone: function() { return this.status === "Done"; },
     userIsDm: function(){
