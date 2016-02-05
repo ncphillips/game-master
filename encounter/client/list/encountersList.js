@@ -17,6 +17,6 @@ Template.encountersList.helpers({
 
 Template.encountersList.events({
     "click .encounter-row": function(){
-        Router.go("encountersView", {campaignId: this.campaign, encounterId: this._id});
+        Router.go("encountersView", {campaignId: this.campaign().getId(), encounterId: this.id()});
     }
 });
