@@ -1,1 +1,1 @@
-Meteor.subscribe("playerCharacters");
+Meteor.subscribe("characters");

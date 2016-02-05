@@ -13,7 +13,7 @@ EncounterCollection.setDatabaseConnection({
         return _db.encounters.findOne(id);
     },
     findByCampaign: function(campaignId){
-        return_db.encounters.find({campaign: campaignId}).fetch();
+        return _db.encounters.find({campaign: campaignId}).fetch();
     }
 
 });

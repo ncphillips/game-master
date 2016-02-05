@@ -76,7 +76,7 @@ Template.encountersView.events({
     "click #start-encounter": function(){
         // Generate Monsters
         var characters = [];
-        this.encounters.monsterGenerators.forEach(function(generator){
+        this.encounters.monsterGenerators().forEach(function(generator){
             characters = $.merge(characters, generateMonsters(generator));
         });
 

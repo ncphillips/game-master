@@ -8,7 +8,6 @@ UserCollection.setDatabaseConnection({
     update: function(id, data, callback){
     },
     findById: function(id){
-        console.log(id);
         return Meteor.users.findOne({_id: id});
     }
 });

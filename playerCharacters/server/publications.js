@@ -1,6 +1,6 @@
-Meteor.publish("playerCharacters", function(){
+Meteor.publish("characters", function(){
     if (this.userId) {
-        return _db.playerCharacters.find();
+        return _db.characters.find();
     } else {
         this.ready();
     }
