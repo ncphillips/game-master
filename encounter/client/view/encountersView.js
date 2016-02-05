@@ -22,7 +22,7 @@ Template.encountersView.helpers({
     inProgress: function() {
         return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES.IN_PROGRESS;
     },
-    isDone: function() { return this.status === "Done"; },
+    isDone: function() { return this.status === ENCOUNTER_STATUSES.DONE; },
     userIsDm: function(){
         return true;
         if (!this.campaign) {
