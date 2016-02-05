@@ -1,9 +1,9 @@
 Template.encountersView.helpers({
     dmEmail: function(){
-        if (this.campaign){
-            var dm = Meteor.users.findOne({_id: this.campaign.dungeonMaster});
+        if (this.campaign && this.campaign.dungeonMaster){
+            var dm = UserCollection.findById(this.campaign.dungeonMaster);
             if(dm){
-                return dm.emails[0].address;
+                return dm.getEmail();
             }
         }
     },
