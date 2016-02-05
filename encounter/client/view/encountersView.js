@@ -24,18 +24,12 @@ Template.encountersView.helpers({
     },
     isDone: function() { return this.status === ENCOUNTER_STATUSES.DONE; },
     userIsDm: function(){
-        return true;
-        if (!this.campaign) {
+        //return true;
+        if (!(this.encounter && this.encounter.dungeonMaster())) {
             return false;
         }
-        return Meteor.userId() === this.campaign.dungeonMaster;
-    },
-    userIsCreatorOrDm: function(){
-        return true;
-        if (!this.campaign) {
-            return false;
-        }
-        return Meteor.userId() === this.campaign.dungeonMaster || Meteor.userId() === this.encounter.creator;
+        console.log(this.encounter.dungeonMaster());
+        return Meteor.userId() === this.encounter.dungeonMaster().getId();
     },
     monsterTemplates: function(){
         return MonsterTemplates.find({}, {sort: {name: 1}}).fetch();
