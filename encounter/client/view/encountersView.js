@@ -22,13 +22,13 @@ Template.encountersView.helpers({
     inProgress: function() {
         return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES.IN_PROGRESS;
     },
-    isDone: function() { return this.status === ENCOUNTER_STATUSES.DONE; },
+    isDone: function() {
+        return this.status === ENCOUNTER_STATUSES.DONE;
+    },
     userIsDm: function(){
-        //return true;
         if (!(this.encounter && this.encounter.dungeonMaster())) {
             return false;
         }
-        console.log(this.encounter.dungeonMaster());
         return Meteor.userId() === this.encounter.dungeonMaster().getId();
     },
     monsterTemplates: function(){
@@ -52,7 +52,8 @@ Template.encountersView.events({
     },
     "click .add-player-character": function(){
         var newPC = $("#new-player-character").find(":selected").val();
-        _db.encounters.update(this.encounter._id, {$push: {playerCharacters: newPC}});
+        this.encounter.addPlayerCharacter(newPC);
+        EncounterCollection.save(this.encounter);
     },
     "click .add-monster": function(){
         var count = $("#num-monsters").val();
