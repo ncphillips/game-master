@@ -75,19 +75,10 @@ Template.encountersView.events({
         EncounterCollection.save(this.encounter);
     },
     "click #start-encounter": function(){
-        // Generate Monsters
-        var characters = [];
-        this.encounters.monsterGenerators().forEach(function(generator){
-            characters = $.merge(characters, generateMonsters(generator));
+        this.encounter.start();
+        EncounterCollection.save(this.encounter, function(){
+            Router.go('encountersRun', Router.current().params);
         });
-
-        // Add Players
-        characters = $.merge(characters, loadPlayerCharacters(this.encounter));
-
-        // Update Status
-        _db.encounters.update(this.encounter.__data__._id, {$set: {status: "In Progress", characters: characters}});
-
-        Router.go('encountersRun', Router.current().params);
     },
     "click #view-running-encounter": function(){
         Router.go('encountersRun', Router.current().params);
