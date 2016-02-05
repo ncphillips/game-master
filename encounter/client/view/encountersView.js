@@ -69,7 +69,9 @@ Template.encountersView.events({
             monsterName: monster.name
         };
 
-        _db.encounters.update(this.encounter._id, {$push: {monsterGenerators: monsterGenerator}});
+        // Todo make constructor for MonsterGenerator
+        this.encounter.addMonsterGenerator(monsterGenerator);
+        EncounterCollection.save(this.encounter);
     },
     "click #start-encounter": function(){
         // Generate Monsters
