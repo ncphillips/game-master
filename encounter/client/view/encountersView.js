@@ -6,13 +6,13 @@ Template.encountersView.helpers({
     },
     playerCharacters: function(){
         if (this.encounter) {
-            return _db.playerCharacters.find({_id: {$in: this.encounter.__data__.playerCharacters || []}}).fetch();
+            return this.encounter.playerCharacters();
         }
         return [];
     },
     potentialPlayerCharacters: function(){
         if (this.encounter) {
-            return _db.playerCharacters.find({_id: {$nin: this.encounter.__data__.playerCharacters || []}, campaign: this.campaign.getId()}).fetch();
+            return this.encounter.potentialPlayerCharacters();
         }
         return [];
     },
@@ -35,7 +35,8 @@ Template.encountersView.helpers({
         return MonsterTemplates.find({}, {sort: {name: 1}}).fetch();
     },
     crumbs: function(){
-        var campaignId = this.campaign._id;
+        if (!this.campaign) return;
+        var campaignId = this.campaign.getId();
         var campaignName = this.campaign.name;
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
