@@ -12,15 +12,17 @@ Template.encountersAdd.helpers({
 Template.encountersAdd.events({
     "submit .new-encounter": function (event) {
         event.preventDefault();
-        var encounter = {
-            campaign: this.campaign._id,
+        var encounter = new Encounter({
+            campaign: this.campaign.getId(),
             name: $("#name").val(),
             description: $("#description").val()
-        };
+        });
 
-        var id = Encounters.insert(encounter);
+        var cid = this.campaign.getId();
 
-        Router.go("encountersView", {campaignId: this.campaign._id, encounterId: id});
+        EncounterCollection.save(encounter, function(id){
+            Router.go("encountersView", {campaignId: cid, encounterId: id});
+        });
     }
 });
 

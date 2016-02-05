@@ -2,8 +2,8 @@ Router.route('/campaigns/:campaignId/encounters', {
     name: 'encountersList',
     data: function(){
         return {
-            campaign: Campaigns.findOne(this.params.campaignId),
-            encounters: Encounters.find({campaign: this.params.campaignId}).fetch()
+            campaign: CampaignCollection.findById(this.params.campaignId),
+            encounters: EncounterCollection.findByCampaign(this.params.campaignId)
         };
     }
 });
@@ -12,7 +12,7 @@ Router.route('/campaigns/:campaignId/encounters/add', {
     name: 'encountersAdd',
     data: function(){
         return {
-            campaign: Campaigns.findOne(this.params.campaignId)
+            campaign: CampaignCollection.findById(this.params.campaignId)
         };
     }
 });
@@ -21,8 +21,8 @@ Router.route('/campaigns/:campaignId/encounters/:encounterId', {
     name: 'encountersView',
     data: function(){
         return {
-            campaign: Campaigns.findOne(this.params.campaignId),
-            encounter: Encounters.findOne(this.params.encounterId, {campaign: this.params.campaignId})
+            campaign: CampaignCollection.findById(this.params.campaignId),
+            encounter: EncounterCollection.findById(this.params.encounterId, {campaign: this.params.campaignId})
         };
     }
 });
@@ -30,7 +30,7 @@ Router.route('/campaigns/:campaignId/encounters/:encounterId', {
 Router.route('/campaigns/:campaignId/encounters/:encounterId/run', {
     name: 'encountersRun',
     onBeforeAction: function(){
-        var encounter = Encounters.findOne(this.params.encounterId, {campaign: this.params.campaignId});
+        var encounter = EncounterCollection.findById(this.params.encounterId);
         if (encounter.status === 'In Progress') {
             this.next();
         } else {
@@ -39,8 +39,8 @@ Router.route('/campaigns/:campaignId/encounters/:encounterId/run', {
     },
     data: function(){
         return {
-            campaign: Campaigns.findOne(this.params.campaignId),
-            encounter: Encounters.findOne(this.params.encounterId, {campaign: this.params.campaignId})
+            campaign: CampaignCollection.findById(this.params.campaignId),
+            encounter: EncounterCollection.findById(this.params.encounterId)
         };
     }
 });

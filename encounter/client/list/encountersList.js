@@ -1,6 +1,6 @@
 Template.encountersList.helpers({
     crumbs: function(){
-        var campaignId = this.campaign._id;
+        var campaignId = this.campaign.getId();
         var campaignName = this.campaign.name;
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
@@ -8,9 +8,9 @@ Template.encountersList.helpers({
         ]};
     },
     addUrlData: function(){
-        console.log(this.data);
+        console.log(this);
         return {
-            campaignId: this.campaign._id
+            campaignId: this.campaign.getId()
         }
     }
 });
