@@ -1,9 +1,9 @@
 Template.campaignsView.helpers({
     numEncounters: function(){
-        return 0;
+        return EncounterCollection.findByCampaign(this.campaign).length;
     },
     numPlayerCharacters: function(){
-        return 0;
+        return PlayerCharacterCollection.findByCampaign(this.campaign).length;
     },
     userIsCreatorOrDm: function(){
         return true;
