@@ -12,13 +12,8 @@ Template.encountersRun.helpers({
         return hp <= 0;
     },
     currentCharacter: function(){
-        if (this.encounter){
-            var index = this.encounter.currentCharacterIndex();
-            var io = this.encounter.initiativeOrder();
-            return io[index];
-        } else {
-            return {};
-        }
+        if (this.encounter)
+            return this.encounter.currentCharacter();
     },
     characters: function(){
         if (this.encounter)
