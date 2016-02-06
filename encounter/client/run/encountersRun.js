@@ -1,30 +1,33 @@
 Template.encountersRun.helpers({
     time: function(){
-        return (this.encounter.round * 6) + " seconds";
+        if (this.encounter)
+            return (this.encounter.round() * 6) + " seconds";
     },
     isCurrentCharacter: function(index){
-        var encounter = Encounters.findOne(Router.current().params.encounterId);
-        return encounter.currentPlayerIndex === index;
+        var encounter = EncounterCollection.findOne(Router.current().params.encounterId);
+        return encounter.currentCharacterIndex() === index;
     },
     isUnconscious: function(hp){
         return hp <= 0;
     },
     currentCharacter: function(){
         if (this.encounter){
-            var index = this.encounter.currentPlayerIndex;
-            var io = getInitativeOrder(this.encounter);
+            var index = this.encounter.currentCharacterIndex();
+            var io = this.encounter.initiativeOrder();
             return io[index];
         } else {
             return {};
         }
     },
     characters: function(){
-        return getInitativeOrder(this.encounter);
+        if (this.encounter)
+            return this.encounter.initiativeOrder();
     },
     crumbs: function(){
-        var campaignId = this.campaign._id;
+        if (!(this.campaign && this.encounter)) return;
+        var campaignId = this.campaign.id();
         var campaignName = this.campaign.name;
-        var encounterId = this.encounter._id;
+        var encounterId = this.encounter.id();
         var encounterName = this.encounter.name;
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
@@ -37,13 +40,12 @@ Template.encountersRun.helpers({
 
 Template.encountersRun.events({
     "click #next-turn": function(){
-        var index = this.encounter.currentPlayerIndex + 1;
-        var round = this.encounter.round;
-
-        var io = getInitativeOrder(this.encounter);
+        var index = this.encounter.currentCharacterIndex() + 1;
+        var round = this.encounter.round();
+        var io = this.encounter.initiativeOrder();
 
         // End of list, go to next round.
-        if (index >= this.encounter.characters.length) {
+        if (index >= io.length) {
             index = 0;
             round++;
         }
@@ -56,7 +58,7 @@ Template.encountersRun.events({
                 index++;
                 nextCharacter = io[index];
                 // Try to not get stuck in the look.
-                if(index >= this.encounter.characters.length){
+                if(index >= io.length){
                     listLoopCount++;
                     if(listLoopCount > 1){
                         console.log("Fucking infinite loops man");
@@ -70,20 +72,22 @@ Template.encountersRun.events({
             $("#everyone-is-dead").modal("show");
         }
 
-        Encounters.update(this.encounter._id, {$set: {currentPlayerIndex: index, round: round}})
+        //Encounters.update(this.encounter.id(), {$set: {currentPlayerIndex: index, round: round}})
 
         // Loop through statuses and decrement rounds. Delete if rounds === 0
-        var updatedStatusEffeects = [];
-        var statusEffects = nextCharacter.statusEffects || [];
+        if (nextCharacter){
+            var updatedStatusEffects = [];
+            var statusEffects = nextCharacter.statusEffects || [];
 
-        statusEffects.forEach(function(status){
-            status.rounds--;
-            if (status.rounds > 0) {
-                updatedStatusEffeects.push(status);
-            }
-        });
+            statusEffects.forEach(function(status){
+                status.rounds--;
+                if(status.rounds > 0){
+                    updatedStatusEffects.push(status);
+                }
+            });
 
-        Characters.update(nextCharacter._id, {$set: {statusEffects: updatedStatusEffeects}});
+            //Characters.update(nextCharacter.id(), {$set: {statusEffects: updatedStatusEffects}});
+        }
     },
     "keypress .deal-damage": function(e){
         var ENTER_CODE = 13;
@@ -99,7 +103,7 @@ Template.encountersRun.events({
             } else if (newHealth < 0) {
                 newHealth = 0;
             }
-            Characters.update(this._id, {$set: {hp: newHealth}});
+            //Characters.update(this.id(), {$set: {hp: newHealth}});
             e.target.value = null;
         }
     },
@@ -110,12 +114,12 @@ Template.encountersRun.events({
             e.preventDefault();
 
             var initiative = e.target.value;
-            Characters.update(this._id, {$set: {initiative: initiative-0}});
+            //Characters.update(this.id(), {$set: {initiative: initiative-0}});
         }
     },
     "click .add-status": function(){
         $("#add-status-effect-modal").modal("show");
-        Session.set("setStatusOnCharacter", this._id);
+        Session.set("setStatusOnCharacter", this.id());
     },
     "click .save-status": function(){
         var status = {
@@ -125,15 +129,13 @@ Template.encountersRun.events({
         };
 
         var cid = Session.get("setStatusOnCharacter");
-        Characters.update(cid, {$push: {statusEffects: status}});
+        //Characters.update(cid, {$push: {statusEffects: status}});
 
         $("#add-status-effect-modal").modal("hide");
     },
     "click #end-encounter": function(e){
         console.log("End combat");
-        // todo: calculate xp
-
-        Encounters.update(this.encounter._id, {$set: {status: "Complete"}});
+        //Encounters.update(this.encounter.id(), {$set: {status: "Complete"}});
     }
 });
 
@@ -144,5 +146,5 @@ Template.encountersRun.onRendered(function(){
 });
 
 function getInitativeOrder(encounter) {
-    return Characters.find({_id: {$in: encounter.characters}}, {sort: {initiative: -1}}).fetch();
+    //return Characters.find({_id: {$in: encounter.characters}}, {sort: {initiative: -1}}).fetch();
 }
