@@ -39,55 +39,8 @@ Template.encountersRun.helpers({
 Template.encountersRun.events({
     "click #next-turn": function(){
         this.encounter.nextTurn();
+
         EncounterCollection.save(this.encounter);
-        //var index = this.encounter.currentCharacterIndex() + 1;
-        //var round = this.encounter.round();
-        //var io = this.encounter.initiativeOrder();
-        //
-        //// End of list, go to next round.
-        //if (index >= io.length) {
-        //    index = 0;
-        //    round++;
-        //}
-        //
-        //// If next character is dead, go to next next...
-        //var listLoopCount = 0;
-        //var nextCharacter = io[index];
-        //try{
-        //    while(nextCharacter.hp <= 0){
-        //        index++;
-        //        nextCharacter = io[index];
-        //        // Try to not get stuck in the look.
-        //        if(index >= io.length){
-        //            listLoopCount++;
-        //            if(listLoopCount > 1){
-        //                console.log("Fucking infinite loops man");
-        //                break;
-        //            }
-        //        }
-        //
-        //        nextCharacter = io[index]
-        //    }
-        //} catch (e) {
-        //    $("#everyone-is-dead").modal("show");
-        //}
-        //
-        ////Encounters.update(this.encounter.id(), {$set: {currentPlayerIndex: index, round: round}})
-        //
-        //// Loop through statuses and decrement rounds. Delete if rounds === 0
-        //if (nextCharacter){
-        //    var updatedStatusEffects = [];
-        //    var statusEffects = nextCharacter.statusEffects || [];
-        //
-        //    statusEffects.forEach(function(status){
-        //        status.rounds--;
-        //        if(status.rounds > 0){
-        //            updatedStatusEffects.push(status);
-        //        }
-        //    });
-        //
-        //    //Characters.update(nextCharacter.id(), {$set: {statusEffects: updatedStatusEffects}});
-        //}
     },
     "keypress .deal-damage": function(e){
         if (e.keyCode === ENTER_CODE) {
@@ -111,17 +64,22 @@ Template.encountersRun.events({
     },
     "click .add-status": function(){
         $("#add-status-effect-modal").modal("show");
-        Session.set("setStatusOnCharacter", this.id());
+        Session.set("addStatusEffectToId", this.id());
     },
     "click .save-status": function(){
-        var status = {
+        var status = new StatusEffect({
             name: $("#new-status-name").val(),
             rounds: $("#new-status-rounds").val(),
             description: $("#new-status-description").val()
-        };
+        });
 
-        var cid = Session.get("setStatusOnCharacter");
-        //Characters.update(cid, {$push: {statusEffects: status}});
+        var id = Session.get("addStatusEffectToId");
+
+        var character = CharacterCollection.findById(id);
+
+        character.addStatusEffect(status);
+
+        CharacterCollection.save(character);
 
         $("#add-status-effect-modal").modal("hide");
     },
