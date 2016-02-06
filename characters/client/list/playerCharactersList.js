@@ -3,7 +3,7 @@ Template.playerCharactersList.helpers({
         return Router.current().params;
     },
     crumbs: function(){
-        var campaignId = this.campaign._id;
+        var campaignId = this.campaign.id();
         var text = this.campaign.name;
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
@@ -15,9 +15,7 @@ Template.playerCharactersList.helpers({
 Template.playerCharactersList.events({
     "click tr": function(){
         var params = Router.current().params;
-        console.log(this);
-        params.playerCharacterId = this.getId();
-        console.log(params);
+        params.playerCharacterId = this.id();
         Router.go("playerCharactersView", params);
     }
 });

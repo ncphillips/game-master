@@ -15,7 +15,7 @@
             <label for="character-player">Player</label>
             <select id="character-player" class="form-control">
                 {{#each playersInCampaign}}
-                    <option value="{{getId}}">{{getEmail}}</option>
+                    <option value="{{id}}">{{primaryEmail}}</option>
                 {{/each}}
             </select>
         </div>
