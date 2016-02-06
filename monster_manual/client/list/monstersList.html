@@ -1,4 +1,11 @@
 <template name="monstersList" xmlns="http://www.w3.org/1999/html">
+    {{#if isNolan}}
+        <br/>
+        <br/>
+        <br/>
+        <textarea id="newmonsters"></textarea>
+        <input id="addnewmonsters" type="button" value="Add"/>
+    {{/if}}
     <h1>Monster Manual</h1>
     <form action="#" class="form form-inline">
         <div class="control-group">
@@ -36,22 +43,22 @@
         <tbody>
         {{# each monsters}}
             <tr class="monster-row">
-                <td>{{getSource}}</td>
-                <td>{{getPage}}</td>
-                <td>{{getName}}</td>
-                <td>{{getAc}}</td>
+                <td>{{source}}</td>
+                <td>{{age}}</td>
+                <td>{{name}}</td>
+                <td>{{ac}}</td>
                 <td>
-                    {{getHp}}
-                    {{#if getHd}}
+                    {{hp}}
+                    {{#if hd}}
                         <span class="pull-right">
-                        {{getHd}}
+                        {{hd}}
                         </span>
                     {{/if}}
                 </td>
-                <td>{{getCr}}</td>
-                <td>{{getSize}}</td>
-                <td>{{getType}}</td>
-                <td>{{getAlignment}}</td>
+                <td>{{cr}}</td>
+                <td>{{size}}</td>
+                <td>{{type}}</td>
+                <td>{{alignment}}</td>
             </tr>
         {{/each}}
         </tbody>

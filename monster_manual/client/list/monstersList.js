@@ -5,6 +5,11 @@ Template.monstersList.helpers({
     pageNum: function(){
         return Session.get("page") + 1;
     },
+    isNolan: function(j){
+        return false;
+        //var nolan = UserCollection.findById(Meteor.userId());
+        //return nolan.primaryEmail() === "ncphillips.19@gmail.com";
+    },
     monsters: function(){
         // Todo: Move this logic into a MonsterTemplateCollection object.
         return monsterTemplateDbConnection.findMonsters(Session.get("monster-query"), Session.get("page")).map(function(data){
@@ -14,6 +19,16 @@ Template.monstersList.helpers({
 });
 
 Template.monstersList.events({
+    //"click #addnewmonsters": function(j) {
+    //    var text = $("#newmonsters").text();
+    //    try{
+    //        var monsters = JSON.parse($("#newmonsters").val());
+    //        Meteor.call("monsterTemplates/bulk", monsters);
+    //
+    //    }catch (e) {
+    //    }
+    //}
+    //,
     "submit": function(e){
         e.preventDefault();
         var query = Session.get("monster-query");
