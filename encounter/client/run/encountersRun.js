@@ -1,10 +1,11 @@
 Template.encountersRun.helpers({
     time: function(){
-        if (this.encounter)
+        if (this.encounter){
             return (this.encounter.round() * 6) + " seconds";
+        }
     },
     isCurrentCharacter: function(index){
-        var encounter = EncounterCollection.findOne(Router.current().params.encounterId);
+        var encounter = EncounterCollection.findById(Router.current().params.encounterId);
         return encounter.currentCharacterIndex() === index;
     },
     isUnconscious: function(hp){

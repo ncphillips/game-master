@@ -27,7 +27,7 @@ NonPlayerCharacterCollection.setDatabaseConnection({
         Meteor.apply(NON_PLAYER_CHARACTER_METHOD_NAMES.CREATE, [data, callback]);
     },
     findAllIn: function(ids){
-        return _db.characters.find({_id: {$in: ids}}).fetch();
+        return _db.characters.find({_id: {$in: ids}, isPlayerCharacter: false}).fetch();
     },
     findByCampaignExcept: function(campaignId, ids){
         return _db.characters.find({_id: {$nin: ids}, campaign: campaignId}).fetch();
