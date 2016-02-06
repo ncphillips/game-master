@@ -24,11 +24,11 @@ Template.encountersRun.helpers({
             return this.encounter.initiativeOrder();
     },
     crumbs: function(){
-        if (!(this.campaign && this.encounter)) return;
+        if (!this.campaign || !this.encounter) return;
         var campaignId = this.campaign.id();
         var campaignName = this.campaign.name;
         var encounterId = this.encounter.id();
-        var encounterName = this.encounter.name;
+        var encounterName = this.encounter.name();
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
             {text: campaignName,  name: "campaignsView", data: {campaignId: campaignId}},
