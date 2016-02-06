@@ -1,4 +1,4 @@
-playerCharacters = PlayerCharacterCollection.setDatabaseConnection({
+PlayerCharacterCollection.setDatabaseConnection({
     findByCampaign: function(campaignId){
         return _db.characters.find({campaign: campaignId, isPlayerCharacter: true}).fetch();
     },
@@ -16,7 +16,7 @@ playerCharacters = PlayerCharacterCollection.setDatabaseConnection({
     }
 });
 
-nonPlayerCharacters = PlayerCharacterCollection.setDatabaseConnection({
+NonPlayerCharacterCollection.setDatabaseConnection({
     findByCampaign: function(campaignId){
         return _db.characters.find({campaign: campaignId, isPlayerCharacter: false}).fetch();
     },

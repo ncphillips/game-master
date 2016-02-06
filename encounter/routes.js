@@ -31,7 +31,7 @@ Router.route('/campaigns/:campaignId/encounters/:encounterId/run', {
     name: 'encountersRun',
     onBeforeAction: function(){
         var encounter = EncounterCollection.findById(this.params.encounterId);
-        if (encounter.status === 'In Progress') {
+        if (encounter && encounter.status() === ENCOUNTER_STATUSES.IN_PROGRESS) {
             this.next();
         } else {
             this.redirect('encountersView', this.params);
