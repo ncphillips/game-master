@@ -1,5 +1,5 @@
 Template.campaignsList.events({
     "click .campaign-row": function(){
-        Router.go("campaignsView", {campaignId: this.getId()});
+        Router.go("campaignsView", {campaignId: this.id()});
     }
 });
