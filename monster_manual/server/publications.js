@@ -1,6 +1,6 @@
 Meteor.publish("monsterTemplates", function(){
     if (this.userId) {
-        return MonsterTemplates.find({});
+        return MonsterTemplates.find({source: "A MM"});
     } else {
         this.ready();
     }
