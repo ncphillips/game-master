@@ -1,32 +1,63 @@
 # Game Master
 
+GameMaster is a web application for pen-and-paper RPGs, such as Dungeons and Dragons. 
+
+The purpose of GameMaster is to provide tools for helping streamline P&P RPGs with
+minimal preparation. 
+
+
 ## Architecture
-* Models are classes of objects containing business logic.
+There are two primary classes of objects in GameMaster:
+
+* Models are classes of objects containing application logic.
 * Collection are used to persist and retrieved Model instances.
-* HTML files contain Blaze templates.
+
+An absolute must in developing GameMaster is to keep the application logic 
+completely separated from the Meteor platform.
+
+Meteor Packages, then, have the following responsibilities:
+ 
+1. Implement the database connection interfaces for the Collections
+1. Render Model information in the DOM
+1. Tie DOM events to Model methods
+1. Request that the Collection fetches/persists Models
+
 
 ### Models
 Models represent a particular part of the application logic.
 
 Some example Models for Campaigns, Encounter, PlayerCharacters, and Users.
 
-All Models are created by loading in some plain data object into a constructor function.
+There several conventions _must_ be upheld for all models.
 
-    function MyModel(data) { }
-    
-    var myModelInstance = new MyModel({});
-    
-There several conventions must be upheld for all models.
+First, All Models are created by loading in some plain data object into a constructor function.
 
-First, he data loaded into the models should always be validated on entry, and 
+Second, the data loaded into the models should always be validated on entry, and 
 unexpected values should be discarded. 
 
-Second, the validated but raw data should be kept away from the user by storing 
+Third, the validated but raw data should be kept away from the user by storing 
 it a property called `__data__`. 
 
-Third, simple data should be made accessible via accessor methods assigned to the
-Models prototype. These functions behave similarly to Knockout's observable 
-properties, or a function that might be both a getter and a setter. For example:
+Here's an example showing the three conventions:
+
+    function MyModel(data) {
+        this.__data__ = validateMyModelData(data);
+    }
+    
+    function validateMyModelData(data) {
+        var validData = {};
+        
+        validData._id = data._id;
+        validData.name = data.name;
+     
+        return validData
+    }
+
+    var myModelInstance = new MyModel({});
+
+The fourth convention is that simple data should be made accessible via accessor 
+methods assigned to the Models prototype. These functions act as both the 
+getter and the setter for that property. For example:
 
     MyModel.prototype.status = function(status) {
         if (typeof status !== 'undefined') {
@@ -35,7 +66,7 @@ properties, or a function that might be both a getter and a setter. For example:
         return this.__data__.status;
     }
     
-Fourth, collection data should be made accessible through a method, but adding or
+Fifth, plural data should be made accessible through a method, but adding or
 retrieving individual items should be done through distinct methods. It is preferred
 to not have a setter for the entire collection.
 
