@@ -1,6 +1,8 @@
 Template.encountersList.helpers({
     crumbs: function(){
-        var campaignId = this.campaign.getId();
+        if (!this.campaign) return;
+
+        var campaignId = this.campaign.id();
         var campaignName = this.campaign.name;
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
@@ -8,15 +10,14 @@ Template.encountersList.helpers({
         ]};
     },
     addUrlData: function(){
-        console.log(this);
         return {
-            campaignId: this.campaign.getId()
+            campaignId: this.campaign.id()
         }
     }
 });
 
 Template.encountersList.events({
     "click .encounter-row": function(){
-        Router.go("encountersView", {campaignId: this.campaign().getId(), encounterId: this.id()});
+        Router.go("encountersView", {campaignId: this.campaign().id(), encounterId: this.id()});
     }
 });

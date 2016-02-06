@@ -1,7 +1,7 @@
 Template.encountersView.helpers({
     dmEmail: function(){
         if (this.encounter) {
-            return this.encounter.dungeonMaster().getEmail();
+            return this.encounter.dungeonMaster().primaryEmail();
         }
     },
     playerCharacters: function(){
@@ -29,14 +29,14 @@ Template.encountersView.helpers({
         if (!(this.encounter && this.encounter.dungeonMaster())) {
             return false;
         }
-        return Meteor.userId() === this.encounter.dungeonMaster().getId();
+        return Meteor.userId() === this.encounter.dungeonMaster().id();
     },
     monsterTemplates: function(){
         return MonsterTemplates.find({}, {sort: {name: 1}}).fetch();
     },
     crumbs: function(){
         if (!this.campaign) return;
-        var campaignId = this.campaign.getId();
+        var campaignId = this.campaign.id();
         var campaignName = this.campaign.name;
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
