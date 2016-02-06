@@ -92,14 +92,15 @@ Template.encountersRun.events({
             e.preventDefault();
 
             var damage = e.target.value;
-            console.log("Dealt " + damage + " damage to " + this.name);
-            var newHealth = this.hp - damage;
-            if (newHealth >= this.max_hp) {
-                newHealth = this.max_hp;
-            } else if (newHealth < 0) {
-                newHealth = 0;
+            this.dealDamage(damage);
+
+            if (this.isPlayerCharacter()) {
+                PlayerCharacterCollection.save(this);
+            } else {
+                NonPlayerCharacterCollection.save(this);
             }
-            //Characters.update(this.id(), {$set: {hp: newHealth}});
+            console.log("Dealt " + damage + " damage to " + this.name());
+
             e.target.value = null;
         }
     },

@@ -8,6 +8,9 @@ PlayerCharacterCollection.setDatabaseConnection({
     insert: function(data, callback){
         Meteor.apply(PLAYER_CHARACTER_METHOD_NAMES.CREATE, [data, callback]);
     },
+    update: function(id, data, callback){
+        Meteor.apply(PLAYER_CHARACTER_METHOD_NAMES.UPDATE, [id, data, callback]);
+    },
     findAllIn: function(ids){
         return _db.characters.find({_id: {$in: ids}}).fetch();
     },
@@ -25,6 +28,9 @@ NonPlayerCharacterCollection.setDatabaseConnection({
     },
     insert: function(data, callback){
         Meteor.apply(NON_PLAYER_CHARACTER_METHOD_NAMES.CREATE, [data, callback]);
+    },
+    update: function(id, data, callback){
+        Meteor.apply(NON_PLAYER_CHARACTER_METHOD_NAMES.UPDATE, [id, data, callback]);
     },
     findAllIn: function(ids){
         return _db.characters.find({_id: {$in: ids}, isPlayerCharacter: false}).fetch();
