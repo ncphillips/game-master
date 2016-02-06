@@ -17,13 +17,14 @@ Template.encountersView.helpers({
         return [];
     },
     notStarted: function() {
-        return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES.NOT_STARTED;
+        console.log(this.encounter.status());
+        return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES().NOT_STARTED;
     },
     inProgress: function() {
-        return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES.IN_PROGRESS;
+        return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES().IN_PROGRESS;
     },
     isDone: function() {
-        return this.status === ENCOUNTER_STATUSES.DONE;
+        return this.status === ENCOUNTER_STATUSES().DONE;
     },
     userIsDm: function(){
         if (!(this.encounter && this.encounter.dungeonMaster())) {
