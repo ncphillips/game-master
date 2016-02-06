@@ -36,54 +36,56 @@ Template.encountersRun.helpers({
 
 Template.encountersRun.events({
     "click #next-turn": function(){
-        var index = this.encounter.currentCharacterIndex() + 1;
-        var round = this.encounter.round();
-        var io = this.encounter.initiativeOrder();
-
-        // End of list, go to next round.
-        if (index >= io.length) {
-            index = 0;
-            round++;
-        }
-
-        // If next character is dead, go to next next...
-        var listLoopCount = 0;
-        var nextCharacter = io[index];
-        try{
-            while(nextCharacter.hp <= 0){
-                index++;
-                nextCharacter = io[index];
-                // Try to not get stuck in the look.
-                if(index >= io.length){
-                    listLoopCount++;
-                    if(listLoopCount > 1){
-                        console.log("Fucking infinite loops man");
-                        break;
-                    }
-                }
-
-                nextCharacter = io[index]
-            }
-        } catch (e) {
-            $("#everyone-is-dead").modal("show");
-        }
-
-        //Encounters.update(this.encounter.id(), {$set: {currentPlayerIndex: index, round: round}})
-
-        // Loop through statuses and decrement rounds. Delete if rounds === 0
-        if (nextCharacter){
-            var updatedStatusEffects = [];
-            var statusEffects = nextCharacter.statusEffects || [];
-
-            statusEffects.forEach(function(status){
-                status.rounds--;
-                if(status.rounds > 0){
-                    updatedStatusEffects.push(status);
-                }
-            });
-
-            //Characters.update(nextCharacter.id(), {$set: {statusEffects: updatedStatusEffects}});
-        }
+        this.encounter.nextTurn();
+        EncounterCollection.save(this.encounter);
+        //var index = this.encounter.currentCharacterIndex() + 1;
+        //var round = this.encounter.round();
+        //var io = this.encounter.initiativeOrder();
+        //
+        //// End of list, go to next round.
+        //if (index >= io.length) {
+        //    index = 0;
+        //    round++;
+        //}
+        //
+        //// If next character is dead, go to next next...
+        //var listLoopCount = 0;
+        //var nextCharacter = io[index];
+        //try{
+        //    while(nextCharacter.hp <= 0){
+        //        index++;
+        //        nextCharacter = io[index];
+        //        // Try to not get stuck in the look.
+        //        if(index >= io.length){
+        //            listLoopCount++;
+        //            if(listLoopCount > 1){
+        //                console.log("Fucking infinite loops man");
+        //                break;
+        //            }
+        //        }
+        //
+        //        nextCharacter = io[index]
+        //    }
+        //} catch (e) {
+        //    $("#everyone-is-dead").modal("show");
+        //}
+        //
+        ////Encounters.update(this.encounter.id(), {$set: {currentPlayerIndex: index, round: round}})
+        //
+        //// Loop through statuses and decrement rounds. Delete if rounds === 0
+        //if (nextCharacter){
+        //    var updatedStatusEffects = [];
+        //    var statusEffects = nextCharacter.statusEffects || [];
+        //
+        //    statusEffects.forEach(function(status){
+        //        status.rounds--;
+        //        if(status.rounds > 0){
+        //            updatedStatusEffects.push(status);
+        //        }
+        //    });
+        //
+        //    //Characters.update(nextCharacter.id(), {$set: {statusEffects: updatedStatusEffects}});
+        //}
     },
     "keypress .deal-damage": function(e){
         var ENTER_CODE = 13;
