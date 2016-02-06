@@ -1,3 +1,5 @@
+ENTER_CODE = 13;
+
 Template.encountersRun.helpers({
     time: function(){
         if (this.encounter){
@@ -88,32 +90,23 @@ Template.encountersRun.events({
         //}
     },
     "keypress .deal-damage": function(e){
-        var ENTER_CODE = 13;
-
         if (e.keyCode === ENTER_CODE) {
             e.preventDefault();
 
-            var damage = e.target.value;
-            this.dealDamage(damage);
+            this.dealDamage(e.target.value);
 
-            if (this.isPlayerCharacter()) {
-                PlayerCharacterCollection.save(this);
-            } else {
-                NonPlayerCharacterCollection.save(this);
-            }
-            console.log("Dealt " + damage + " damage to " + this.name());
+            CharacterCollection.save(this);
 
             e.target.value = null;
         }
     },
     "keypress .pc-initiative": function(e){
-        var ENTER_CODE = 13;
-
         if (e.keyCode === ENTER_CODE) {
             e.preventDefault();
 
-            var initiative = e.target.value;
-            //Characters.update(this.id(), {$set: {initiative: initiative-0}});
+            this.initiative(e.target.value);
+
+            CharacterCollection.save(this);
         }
     },
     "click .add-status": function(){
