@@ -31,7 +31,9 @@
                     {{#each playerCharacters}}
                         <div class="list-group-item clearfix">
                             {{name}}
+                            {{#if notStarted}}
                             <span class="btn btn-danger btn-sm remove-player-character pull-right">Remove</span>
+                            {{/if}}
                         </div>
                     {{/each}}
                 </div>
@@ -39,39 +41,45 @@
                 <div class="alert alert-info">There are no Player Characters in the Encounter!</div>
             {{/if}}
         </div>
-        <div class="control-group col-md-6">
-            <select id="new-player-character" class="form-control">
-                {{#each potentialPlayerCharacters}}
-                    <option value="{{id}}">{{name}}</option>
-                {{/each}}
-            </select>
-            <br/>
-            <div class="control-group">
-                <input type="button" class="btn btn-info btn-sm btn-block add-player-character" value="Add Player Character">
-            </div>
-        </div>
+        {{#if userIsDm}}
+            {{#if notStarted}}
+                <div class="control-group col-md-6">
+                    <select id="new-player-character" class="form-control">
+                        {{#each potentialPlayerCharacters}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                    <br/>
+                    <div class="control-group">
+                        <input type="button" class="btn btn-info btn-sm btn-block add-player-character" value="Add Player Character">
+                    </div>
+                </div>
+            {{/if}}
+        {{/if}}
     </div>
     <div class="">
         <h3>Monsters</h3>
         {{#if userIsDm}}
-            <div class="row">
-                <div class="control-group col-sm-4">
-                    <label for="num_monsters">Count</label>
-                    <input type="number" min="1" class="form-control" id="num-monsters" value="1"/>
+            {{#if notStarted}}
+                <div class="row">
+                    <div class="control-group col-sm-4">
+                        <label for="num_monsters">Count</label>
+                        <input type="number" min="1" class="form-control" id="num-monsters" value="1"/>
+                    </div>
+                    <div class="control-group col-sm-4">
+                        <label for="monster-template">Monster</label>
+                        <select id="monster-name" class="form-control">
+                            {{#each monsterTemplates}}
+                                <option value="{{_id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="control-group col-sm-4">
+                        <label></label>
+                        <input type="button" class="btn btn-primary btn-sm add-monster form-control" value="Add Monsters">
+                    </div>
                 </div>
-                <div class="control-group col-sm-4">
-                    <label for="monster-template">Monster</label>
-                    <select id="monster-name" class="form-control">
-                        {{#each monsterTemplates}}
-                            <option value="{{_id}}">{{name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div class="control-group col-sm-4">
-                    <label></label>
-                    <input type="button" class="btn btn-primary btn-sm add-monster form-control" value="Add Monsters">
-                </div>
-            </div>
+            {{/if}}
         {{/if}}
         <table class="table table-striped">
             <thead>
@@ -86,7 +94,7 @@
                 <tr>
                     <td>{{count}}</td>
                     <td>{{monsterName}}</td>
-                    <td><input type="button" class="btn btn-sm btn-danger remove-monster" value="Remove"></td>
+                    <td>{{#if notStarted}}<input type="button" class="btn btn-sm btn-danger remove-monster" value="Remove">{{/if}}</td>
                 </tr>
             {{/each}}
             </tbody>
