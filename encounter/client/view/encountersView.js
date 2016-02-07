@@ -92,9 +92,6 @@ Template.encountersView.events({
     }
 });
 
-function rollD20(mod) {
-    return Math.floor(Math.random() * 20) + 1 + mod;
-}
 
 function rollHitDie(hd) {
     return 1;
