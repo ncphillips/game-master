@@ -36,13 +36,28 @@ Template.encountersRun.helpers({
     },
     characterToView: function(){
         return CharacterCollection.findById(Session.get("characterToView"));
-    }
+    },
+    potentialPlayerCharacters: function(){
+        if (this.encounter) {
+            return this.encounter.potentialPlayerCharacters();
+        }
+        return [];
+    },
 });
 
 Template.encountersRun.events({
     "click .character-name": function(){
         Session.set("characterToView", this.id());
         $("#character-sheet-modal").modal("show");
+    },
+    "click #add-player-character": function(){
+        $("#add-player-character-modal").modal("show");
+    },
+    "click #save-new-player-character": function(){
+        var id = $("#new-player-character-id").val();
+        this.encounter.addPlayerCharacter(id);
+        EncounterCollection.save(this.encounter);
+        $("#add-player-character-modal").modal("hide");
     },
     "click #next-turn": function(){
         this.encounter.nextTurn();
