@@ -68,12 +68,18 @@ Template.encountersView.events({
         var monsterGenerator = {
             count: count || 0,
             monsterId: monster._id,
-            monsterName: monster.name
+            monsterName: monster.name,
+            encounterId: this.encounter.id()
         };
 
         // Todo make constructor for MonsterGenerator
         this.encounter.addMonsterGenerator(monsterGenerator);
         EncounterCollection.save(this.encounter);
+    },
+    "click .remove-monster": function(){
+        var encounter = EncounterCollection.findById(this.encounterId);
+        encounter.removeMonsterGenerator(this);
+        EncounterCollection.save(encounter);
     },
     "click #start-encounter": function(){
         this.encounter.start();
