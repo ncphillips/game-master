@@ -39,6 +39,19 @@ Template.encountersRun.helpers({
 Template.encountersRun.events({
     "click #next-turn": function(){
         this.encounter.nextTurn();
+        console.log(this.encounter);
+
+        this.encounter.initiativeOrder().forEach(function(character){
+            var damage_selector = "#character-" + character.id() + " .deal-damage";
+
+            var damage = $(damage_selector).val();
+
+            if (damage) {
+                character.dealDamage(damage);
+                CharacterCollection.save(character);
+                $(damage_selector).val('');
+            }
+        });
 
         EncounterCollection.save(this.encounter);
     },
