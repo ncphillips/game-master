@@ -8,13 +8,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Game Master</a>
+                <a class="navbar-brand" href="/">Game Master</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="{{#if currentRouteIs "homepage"}}active{{/if}}">
-                        {{#linkTo route="homepage"}}Home{{/linkTo}}
-                    </li>
                     {{# if currentUser}}
                         <li class="{{#if currentRouteIs "campaigns"}}active{{/if}}">
                             {{#linkTo route="campaignsList"}}Campaigns{{/linkTo}}
@@ -25,6 +22,7 @@
                     {{/if}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://github.com/ncphillips/game-master/issues/new">Issues</a></li>
                     {{> loginButtons}}
                 </ul>
             </div><!--/.nav-collapse -->
