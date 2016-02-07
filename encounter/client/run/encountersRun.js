@@ -43,6 +43,9 @@ Template.encountersRun.helpers({
         }
         return [];
     },
+    monsterTemplates: function(){
+        return MonsterTemplates.find({}, {sort: {name: 1}}).fetch();
+    }
 });
 
 Template.encountersRun.events({
@@ -58,6 +61,26 @@ Template.encountersRun.events({
         this.encounter.addPlayerCharacter(id);
         EncounterCollection.save(this.encounter);
         $("#add-player-character-modal").modal("hide");
+    },
+    "click #add-monsters": function(){
+        $("#add-monsters-modal").modal("show");
+    },
+    "click #save-monsters": function(){
+        var count = $("#num-monsters").val();
+        var monsterName = $("#monster-name").find(":selected").text();
+        var monster = MonsterTemplates.findOne({name: monsterName});
+
+        var monsterGenerator = {
+            count: count || 0,
+            monsterId: monster._id,
+            monsterName: monster.name,
+            encounterId: this.encounter.id()
+        };
+
+        // Todo make constructor for MonsterGenerator
+        this.encounter.addNonPlayerCharacterFromGenerator(monsterGenerator);
+        EncounterCollection.save(this.encounter);
+        $("#add-monsters-modal").modal("hide");
     },
     "click #next-turn": function(){
         this.encounter.nextTurn();
