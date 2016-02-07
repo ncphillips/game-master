@@ -1,5 +1,5 @@
 <template name="characterSheet">
-    <h1>Player Character: {{ name }}</h1>
+    <h1>{{ name }}</h1>
     {{#if size}}<div class="col-xs-4"><b>Size:</b></div><div class="col-xs-8">{{sizeText size}}</div>{{/if}}
     {{#if ac}}<div class="col-xs-4"><b>Armor Class:</b></div><div class="col-xs-8">{{ac}}</div>{{/if}}
     {{#if hp}}<div class="col-xs-4"><b>Hit Points:</b></div><div class="col-xs-8">{{hp}} ({{hd}})</div>{{/if}}

@@ -1,51 +1,66 @@
 <template name="encountersRun">
     {{> breadcrumbs crumbs}}
-    <h1>{{encounter.name}} Initiative Order <span class="btn btn-sm btn-danger pull-right" id="end-encounter">End Encounter</span></h1>
+    <h1>{{encounter.name}} <span class="btn btn-sm btn-danger pull-right" id="end-encounter">End Encounter</span></h1>
     <div class="row">
         <div class="col-md-6">
-            <h2>Round: {{encounter.round}} <small>{{time}}</small><span id="next-turn" class="btn btn-default pull-right">Next Turn</span></h2>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Init</th>
-                    <th>Name</th>
-                    <th>HP</th>
-                    <th>Deal Damage</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each characters}}
-                    <tr class="{{#if isCurrentCharacter @index}}info{{/if}}" id="character-{{id}}">
-                        <td>
-                            <input type="number" min="0" value="{{initiative}}" class="pc-initiative form-control" style="width: 60px"/>
-                        </td>
-                        <td class="character-name">{{name}}</td>
-                        <td>{{hp}}</td>
-                        <td class="form-inline">
-                            <input class="deal-damage form-control" type="number" style="width: 60px">
-                        </td>
-                        <td>
-                            {{#if isUnconscious hp}}
-                                <span class="label label-danger">Unconscious</span>
-                            {{/if}}
-                            {{#each statusEffects}}
-                                <p  class="status-effect" data-toggle="tooltip" data-placement="left" title="{{description}}"><b>{{name}}</b>  <i>{{roundsLeft}}</i></p>
-                            {{/each}}
-                        </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-            <h3>Actions</h3>
-            <input id="add-status" type="button" value="Add Status" class="btn btn-sm btn-default"/>
-            <input id="add-player-character" type="button" value="Add Player Character" class="btn btn-sm btn-default"/>
-            <input id="add-monsters" type="button" value="Add Monsters" class="btn btn-sm btn-default"/>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title"> Initiative Order <span class="pull-right">Round: {{encounter.round}} <small>{{time}}</small></span></h2>
+                </div>
+                <div class="panel-body">
+                    <span id="next-turn" class="btn btn-default pull-right">Next Turn</span>
+                    <input id="add-player-character" type="button"  value="Add PC" class="btn btn-success"/>
+                    <input id="add-monsters" type="button"          value="Add Monster" class="btn btn-warning"/>
+                    <input id="add-status" type="button"            value="Add Status" class="btn btn-info"/>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Init</th>
+                            <th>Name</th>
+                            <th>HP</th>
+                            <th>Deal Damage</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each characters}}
+                            <tr class="{{#if isCurrentCharacter @index}}info{{/if}}" id="character-{{id}}">
+                                <td>
+                                    <input type="number" min="0" value="{{initiative}}" class="pc-initiative form-control" style="width: 60px"/>
+                                </td>
+                                <td class="character-name">{{name}}</td>
+                                <td>{{hp}}</td>
+                                <td class="form-inline">
+                                    <input class="deal-damage form-control" type="number" style="width: 60px">
+                                </td>
+                                <td>
+                                    {{#if isUnconscious hp}}
+                                        <span class="label label-danger">Unconscious</span>
+                                    {{/if}}
+                                    {{#each statusEffects}}
+                                        <p  class="status-effect" data-toggle="tooltip" data-placement="left" title="{{description}}"><b>{{name}}</b>  <i>{{roundsLeft}}</i></p>
+                                    {{/each}}
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
-            {{#with currentCharacter}}
-                {{> characterSheet}}
-            {{/with}}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Current Character Sheet</h2>
+                </div>
+                <div class="panel-body">
+                    {{#with currentCharacter}}
+                        {{> characterSheet}}
+                    {{/with}}
+                </div>
+            </div>
         </div>
     </div>
 
