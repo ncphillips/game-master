@@ -75,9 +75,8 @@ Template.encountersRun.events({
             CharacterCollection.save(this);
         }
     },
-    "click .add-status": function(){
+    "click #add-status": function(){
         $("#add-status-effect-modal").modal("show");
-        Session.set("addStatusEffectToId", this.id());
     },
     "click .save-status": function(){
         var status = new StatusEffect({
@@ -86,14 +85,10 @@ Template.encountersRun.events({
             description: $("#new-status-description").val()
         });
 
-        var id = Session.get("addStatusEffectToId");
-
+        var id = $("#status-character-id").val();
         var character = CharacterCollection.findById(id);
-
         character.addStatusEffect(status);
-
         CharacterCollection.save(character);
-
         $("#add-status-effect-modal").modal("hide");
     },
     "click #end-encounter": function(e){

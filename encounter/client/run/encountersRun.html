@@ -18,12 +18,12 @@
                 {{#each characters}}
                     <tr class="{{#if isCurrentCharacter @index}}info{{/if}}" id="character-{{id}}">
                         <td>
-                            <input type="number" min="0" value="{{initiative}}" class="pc-initiative form-control"/>
+                            <input type="number" min="0" value="{{initiative}}" class="pc-initiative form-control" style="width: 60px"/>
                         </td>
                         <td>{{name}}</td>
                         <td>{{hp}}</td>
                         <td class="form-inline">
-                            <input class="deal-damage form-control" type="number">
+                            <input class="deal-damage form-control" type="number" style="width: 60px">
                         </td>
                         <td>
                             {{#if isUnconscious hp}}
@@ -32,12 +32,13 @@
                             {{#each statusEffects}}
                                 <p  class="status-effect" data-toggle="tooltip" data-placement="left" title="{{description}}"><b>{{name}}</b>  <i>{{roundsLeft}}</i></p>
                             {{/each}}
-                            <span class="btn btn-sm btn-default add-status">Add Status</span>
                         </td>
                     </tr>
                 {{/each}}
                 </tbody>
             </table>
+            <h3>Actions</h3>
+            <input id="add-status" type="button" value="Add Status" class="btn btn-sm btn-default"/>
         </div>
         <div class="col-md-6">
             {{#with currentCharacter}}
@@ -73,7 +74,13 @@
                 <div class="modal-body">
                     <p>Describe a new status effect.</p>
                     <p>Note: Currently Game Master only supports status effects that end on the start of the turn of the character it is effecting..</p>
-
+                    <div class="control-group">
+                        <select class="form-control" id="status-character-id">
+                            {{#each characters}}
+                                <option id="{{id}}" value="{{id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
                     <div class="control-group">
                         <label for="new-status-name">Name</label>
                         <input id="new-status-name" type="text" value="" class="form-control"/>
