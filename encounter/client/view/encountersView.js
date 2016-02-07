@@ -17,7 +17,6 @@ Template.encountersView.helpers({
         return [];
     },
     notStarted: function() {
-        console.log(this.encounter.status());
         return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES().NOT_STARTED;
     },
     inProgress: function() {
@@ -52,7 +51,8 @@ Template.encountersView.events({
         var encounterId = Router.current().params.encounterId;
 
         var encounter = EncounterCollection.findById(encounterId);
-        encounter.removePlayerCharacter(this._id);
+        console.log(encounter, this);
+        encounter.removePlayerCharacter(this.id());
         EncounterCollection.save(encounter);
     },
     "click .add-player-character": function(){
