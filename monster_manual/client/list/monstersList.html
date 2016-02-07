@@ -21,11 +21,13 @@
         </div>
     </form>
     <br/>
-    <div>
-        <div id="previous-page" class="btn btn-default pull-left">Previous</div>
-        <div style="text-align: center"><h3>Page {{pageNum}}</h3></div>
-        <div id="next-page"     class="btn btn-default pull-right">Next</div>
-    </div>
+    <nav>
+        <ul class="pager">
+            <li id="previous-page" class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+            <li class="">{{pageNum}}</li>
+            <li id="next-page" class="next"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
     <table class="table table-striped">
         <thead>
         <tr>
