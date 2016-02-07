@@ -2,27 +2,30 @@
     <h1>
         Campaigns
     </h1>
+    <p>
+
+    </p>
     {{#linkTo route="campaignsAdd"}}
         <span class="btn btn-primary add-campaign">Add Campaign</span>
     {{/linkTo}}
     <table class="table table-striped" >
         <thead>
         <tr>
-            <th>
-                Name:
-            </th>
-            <th></th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Owner</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
         {{#each campaigns}}
             <tr class="campaign-row">
-                <td>
-                    {{name}}
-                </td>
+                <td>{{name}}</td>
+                <td>{{description}}</td>
+                <td>{{creator.primaryEmail}}</td>
                 <td>
                 {{#if userIsOwner}}
-                    <input type="button" class="campaign-delete btn btn-sm btn-danger pull-right" value="Delete">
+                    <input type="button" class="campaign-delete btn btn-sm btn-danger" value="Delete">
                 {{/if}}
                 </td>
             </tr>
