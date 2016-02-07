@@ -12,7 +12,9 @@ Template.campaignsAdd.events({
 
         var campaign = new Campaign({
             name: $("#name").val(),
-            description: $("#description").val()
+            description: $("#description").val(),
+            creator: Meteor.userId(),
+            dungeonMaster: Meteor.userId()
         });
 
         CampaignCollection.save(campaign, function(_id){

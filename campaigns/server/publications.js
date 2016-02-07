@@ -4,7 +4,18 @@
  * users view of said collection.
  */
 Meteor.publish("campaigns", function() {
-    return _db.campaigns.find();
+    if (this.userId) {
+        var playerIn = _db.campaignMemberships.find({userId: this.userId}).fetch();
+
+        var campaignIds = playerIn.map(function(membership){
+            return membership.groupId;
+        });
+
+        return _db.campaigns.find({$or: [{_id: {$in: campaignIds}}, {creator: this.userId}, {dungeonMaster: this.userId}]})
+
+    } else {
+        this.ready();
+    }
 });
 
 Meteor.publish("campaignMemberships", function() {
