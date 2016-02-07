@@ -29,36 +29,36 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <td>Source</td>
-            <td>Page</td>
-            <td>Name</td>
-            <td>AC</td>
-            <td>HP</td>
-            <td>CR</td>
-            <td>Size</td>
-            <td>Type</td>
-            <td>Alignment</td>
+            <td class="hidden-xs">Source</td>
+            <td class="hidden-xs">Page</td>
+            <td class="">Name</td>
+            <td class="">AC</td>
+            <td class="">HP</td>
+            <td class="">CR</td>
+            <td class="">Size</td>
+            <td class="hidden-xs">Type</td>
+            <td class="hidden-xs">Alignment</td>
         </tr>
         </thead>
         <tbody>
         {{# each monsters}}
             <tr class="monster-row">
-                <td>{{source}}</td>
-                <td>{{age}}</td>
-                <td>{{name}}</td>
-                <td>{{ac}}</td>
-                <td>
+                <td class="hidden-xs">{{source}}</td>
+                <td class="hidden-xs">{{page}}</td>
+                <td class="">{{name}}</td>
+                <td class="">{{ac}}</td>
+                <td class="">
                     {{hp}}
                     {{#if hd}}
-                        <span class="pull-right">
+                        <span class="pull-right hidden-xs">
                         {{hd}}
                         </span>
                     {{/if}}
                 </td>
-                <td>{{cr}}</td>
-                <td>{{size}}</td>
-                <td>{{type}}</td>
-                <td>{{alignment}}</td>
+                <td class="">{{cr}}</td>
+                <td class="">{{size}}</td>
+                <td class="hidden-xs">{{type}}</td>
+                <td class="hidden-xs">{{alignment}}</td>
             </tr>
         {{/each}}
         </tbody>
