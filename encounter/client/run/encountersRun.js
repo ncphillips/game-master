@@ -33,10 +33,17 @@ Template.encountersRun.helpers({
             {text: "Encounters", name: "encountersList", data: {campaignId: campaignId}},
             {text: encounterName,  name: "encountersView", data: {campaignId: campaignId, encounterId: encounterId}}
         ]};
+    },
+    characterToView: function(){
+        return CharacterCollection.findById(Session.get("characterToView"));
     }
 });
 
 Template.encountersRun.events({
+    "click .character-name": function(){
+        Session.set("characterToView", this.id());
+        $("#character-sheet-modal").modal("show");
+    },
     "click #next-turn": function(){
         this.encounter.nextTurn();
         console.log(this.encounter);

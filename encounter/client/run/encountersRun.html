@@ -20,7 +20,7 @@
                         <td>
                             <input type="number" min="0" value="{{initiative}}" class="pc-initiative form-control" style="width: 60px"/>
                         </td>
-                        <td>{{name}}</td>
+                        <td class="character-name">{{name}}</td>
                         <td>{{hp}}</td>
                         <td class="form-inline">
                             <input class="deal-damage form-control" type="number" style="width: 60px">
@@ -97,6 +97,23 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary save-status">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="character-sheet-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Character Sheet</h4>
+                </div>
+                <div class="modal-body">
+                    {{> characterSheet characterToView}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
