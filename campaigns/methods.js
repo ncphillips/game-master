@@ -4,6 +4,7 @@
 CAMPAIGN_METHOD_NAMES = { };
 CAMPAIGN_METHOD_NAMES.CREATE = "campaigns/create";
 CAMPAIGN_METHOD_NAMES.UPDATE = "campaigns/update";
+CAMPAIGN_METHOD_NAMES.REMOVE = "campaigns/remove";
 
 CAMPAIGN_METHODS = { };
 
@@ -16,6 +17,12 @@ CAMPAIGN_METHODS[CAMPAIGN_METHOD_NAMES.CREATE] = function(data, callback){
 
 CAMPAIGN_METHODS[CAMPAIGN_METHOD_NAMES.UPDATE] = function(id, data, callback){
     var _id = _db.campaigns.update(id, data);
+
+    if (callback) callback(_id);
+};
+
+CAMPAIGN_METHODS[CAMPAIGN_METHOD_NAMES.REMOVE] = function(id, callback){
+    var _id = _db.campaigns.remove({_id: id});
 
     if (callback) callback(_id);
 };

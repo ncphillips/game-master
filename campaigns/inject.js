@@ -9,13 +9,15 @@ CampaignCollection.setDatabaseConnection({
     update: function(id, data, callback){
         Meteor.call(CAMPAIGN_METHOD_NAMES.UPDATE, id, data, callback);
     },
+    remove: function(id, callback){
+        Meteor.apply(CAMPAIGN_METHOD_NAMES.REMOVE, [id, callback]);
+    },
     findById: function(id){
         return _db.campaigns.findOne(id);
     },
     findAll: function(){
         return _db.campaigns.find({}).fetch();
     }
-
 });
 
 CampaignMembershipCollection.setDatabaseConnection({
