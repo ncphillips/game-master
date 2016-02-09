@@ -10,6 +10,7 @@
             <td>Name</td>
             <td>Status</td>
             <td>Description</td>
+            <td></td>
         </tr>
         </thead>
         <tbody>
@@ -18,6 +19,9 @@
                 <td>{{name}}</td>
                 <td>{{status}}</td>
                 <td>{{description}}</td>
+                <td>
+                    <input type="button" class="encounter-delete btn btn-sm btn-danger" value="Delete">
+                </td>
             </tr>
         {{/each}}
         </tbody>

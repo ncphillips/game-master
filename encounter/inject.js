@@ -14,6 +14,9 @@ EncounterCollection.setDatabaseConnection({
     },
     findByCampaign: function(campaignId){
         return _db.encounters.find({campaign: campaignId}).fetch();
+    },
+    remove: function(id, callback){
+        Meteor.apply(ENCOUNTER_METHOD_NAMES.REMOVE, [id, callback]);
     }
 
 });

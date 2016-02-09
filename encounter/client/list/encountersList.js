@@ -17,6 +17,10 @@ Template.encountersList.helpers({
 });
 
 Template.encountersList.events({
+    "click .encounter-delete": function(e){
+        EncounterCollection.remove(this);
+        e.stopPropagation();
+    },
     "click .encounter-row": function(){
         Router.go("encountersView", {campaignId: this.campaign().id(), encounterId: this.id()});
     }
