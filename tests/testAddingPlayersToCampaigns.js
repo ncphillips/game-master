@@ -1,7 +1,7 @@
 var should = require("should");
 var Campaign = require("../lib/models/Campaign");
 var User = require("../lib/models/User");
-var CampaignMembershipCollection = require("../lib/collections/CampaignMembershipCollection");
+var CampaignMembershipCollection = require("../lib/zCollections/CampaignMembershipCollection");
 
 describe("Campaign Membership", function() {
     var FakeUserDb = {
