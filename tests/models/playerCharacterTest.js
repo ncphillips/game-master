@@ -11,13 +11,13 @@ describe("PlayerCharacters", function() {
        it("should have a name", function() {
            var playerCharacter = new PlayerCharacter(data);
 
-           playerCharacter.getName().should.equal(data.name);
+           playerCharacter.name().should.equal(data.name);
        });
 
         it("should have no status effects", function(){
             var playerCharacter = new PlayerCharacter(data);
 
-            playerCharacter.getStatusEffects().length.should.equal(0);
+            playerCharacter.statusEffects().length.should.equal(0);
         });
     });
 
@@ -34,25 +34,25 @@ describe("PlayerCharacters", function() {
         it("should add a second copy of a stackable effect", function(){
             var playerCharacter = new PlayerCharacter(data);
             var statusEffect = new StatusEffect();
-            statusEffect.setName("Test Effect");
-            statusEffect.setStackable(true);
+            statusEffect.name("Test Effect");
+            statusEffect.isStackable(true);
 
             playerCharacter.addStatusEffect(statusEffect);
             playerCharacter.addStatusEffect(statusEffect);
 
-            playerCharacter.getStatusEffects().length.should.equal(2);
+            playerCharacter.statusEffects().length.should.equal(2);
         });
 
         it("should not add a second copy of a non-stackable effect", function(){
             var playerCharacter = new PlayerCharacter(data);
             var statusEffect = new StatusEffect();
-            statusEffect.setName("Test Effect");
-            statusEffect.setStackable(false);
+            statusEffect.name("Test Effect");
+            statusEffect.isStackable(false);
 
             playerCharacter.addStatusEffect(statusEffect);
             playerCharacter.addStatusEffect(statusEffect);
 
-            playerCharacter.getStatusEffects().length.should.equal(1);
+            playerCharacter.statusEffects().length.should.equal(1);
         })
     });
 

@@ -10,32 +10,10 @@ describe("Campaign", function() {
     };
 
     describe("new campaigns", function() {
-        it("should exist", function() {
-            var campaign = new Campaign(campaignData);
-
-            should.exist(campaign);
-        });
-
-        it("should throw an Error without a name ", function() {
-            (function() { new Campaign(); }).should.throw();
-        });
-
-        it("should set the name from the input value", function() {
-            var campaign = new Campaign(campaignData);
-
-            campaign.name.should.equal(campaignData.name);
-        });
-
         it("should be running", function() {
             var campaign = new Campaign(campaignData);
 
             campaign.isRunning().should.be.true();
-        });
-
-        it("should have no player characters", function() {
-            var campaign = new Campaign(campaignData);
-
-            campaign.getPlayerCharacters().length.should.equal(0);
         });
     });
 
