@@ -1,6 +1,7 @@
 "use strict";
 
 var should = require("should");
+// Todo: Configure mocha to not need relative paths
 var PlayerCharacter = require("../../lib/models/characters/PlayerCharacter");
 var StatusEffect = require("../../lib/models/StatusEffect");
 
@@ -32,10 +33,11 @@ describe("PlayerCharacters", function() {
         });
 
         it("should add a second copy of a stackable effect", function(){
+            // todo: don't use `new PlayerCharacter(data)` with a local `createStatusEffectContainer` because it can work on many things.
             var playerCharacter = new PlayerCharacter(data);
-            var statusEffect = new StatusEffect();
-            statusEffect.name("Test Effect");
-            statusEffect.isStackable(true);
+            var statusEffect = new StatusEffect({ name: "irellevant", stackable: true });
+            // todo: StatusEffect.createStackable({});
+            // todo: Object Mother pattern
 
             playerCharacter.addStatusEffect(statusEffect);
             playerCharacter.addStatusEffect(statusEffect);
@@ -45,9 +47,7 @@ describe("PlayerCharacters", function() {
 
         it("should not add a second copy of a non-stackable effect", function(){
             var playerCharacter = new PlayerCharacter(data);
-            var statusEffect = new StatusEffect();
-            statusEffect.name("Test Effect");
-            statusEffect.isStackable(false);
+            var statusEffect = new StatusEffect({ name: "irrelevant", stackable: true });
 
             playerCharacter.addStatusEffect(statusEffect);
             playerCharacter.addStatusEffect(statusEffect);
