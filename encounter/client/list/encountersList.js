@@ -3,7 +3,7 @@ Template.encountersList.helpers({
         if (!this.campaign) return;
 
         var campaignId = this.campaign.id();
-        var campaignName = this.campaign.name;
+        var campaignName = this.campaign.name();
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
             {text: campaignName,  name: "campaignsView", data: {campaignId: campaignId}}

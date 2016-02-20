@@ -1,7 +1,7 @@
 Template.encountersAdd.helpers({
     crumbs: function(){
         var campaignId = this.campaign.id();
-        var campaignName = this.campaign.name;
+        var campaignName = this.campaign.name();
         return {breadcrumbs: [
             {text: "Campaigns", name: "campaignsList", data: {}},
             {text: campaignName,  name: "campaignsView", data: {campaignId: campaignId}},

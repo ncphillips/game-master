@@ -24,7 +24,7 @@ Template.encountersRun.helpers({
     crumbs: function(){
         if (!this.campaign || !this.encounter) return;
         var campaignId = this.campaign.id();
-        var campaignName = this.campaign.name;
+        var campaignName = this.campaign.name();
         var encounterId = this.encounter.id();
         var encounterName = this.encounter.name();
         return {breadcrumbs: [

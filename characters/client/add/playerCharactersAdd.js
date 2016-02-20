@@ -5,7 +5,7 @@ Template.playerCharactersAdd.helpers({
     crumbs: function(){
         if (this.campaign){
             var campaignId = this.campaign.id();
-            var text = this.campaign.name;
+            var text = this.campaign.name();
             return {
                 breadcrumbs: [{
                     text: "Campaigns",
