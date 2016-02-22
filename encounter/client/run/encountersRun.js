@@ -34,6 +34,10 @@ Template.encountersRun.helpers({
             {text: encounterName,  name: "encountersView", data: {campaignId: campaignId, encounterId: encounterId}}
         ]};
     },
+    userIsDm: function(context){
+        if (!context) context = this;
+        return context.campaign && Meteor.userId() === context.campaign.dungeonMaster();
+    },
     characterToView: function(){
         return CharacterCollection.findById(Session.get("characterToView"));
     },
