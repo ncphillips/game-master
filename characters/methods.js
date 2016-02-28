@@ -1,6 +1,7 @@
 PLAYER_CHARACTER_METHOD_NAMES = {};
 PLAYER_CHARACTER_METHOD_NAMES.CREATE = "playerCharacters/create";
 PLAYER_CHARACTER_METHOD_NAMES.UPDATE = "playerCharacters/update";
+PLAYER_CHARACTER_METHOD_NAMES.REMOVE = "playerCharacters/remove";
 
 PLAYER_CHARACTER_METHODS= {};
 PLAYER_CHARACTER_METHODS[PLAYER_CHARACTER_METHOD_NAMES.CREATE] = function(data, callback){
@@ -11,6 +12,10 @@ PLAYER_CHARACTER_METHODS[PLAYER_CHARACTER_METHOD_NAMES.CREATE] = function(data, 
 PLAYER_CHARACTER_METHODS[PLAYER_CHARACTER_METHOD_NAMES.UPDATE] = function(id, data, callback){
     data.isPlayerCharacter = true;
     var _id = _db.characters.update(id, data);
+    if (callback) callback(_id);
+};
+PLAYER_CHARACTER_METHODS[PLAYER_CHARACTER_METHOD_NAMES.REMOVE] = function(id, callback){
+    var _id = _db.characters.remove({_id: id});
     if (callback) callback(_id);
 };
 

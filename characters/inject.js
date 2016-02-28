@@ -11,6 +11,9 @@ PlayerCharacterCollection.setDatabaseConnection({
     update: function(id, data, callback){
         Meteor.apply(PLAYER_CHARACTER_METHOD_NAMES.UPDATE, [id, data, callback]);
     },
+    remove: function(id, callback){
+        Meteor.apply(PLAYER_CHARACTER_METHOD_NAMES.REMOVE, [id, callback]);
+    },
     findAllIn: function(ids){
         return _db.characters.find({_id: {$in: ids}}).fetch();
     },

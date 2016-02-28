@@ -22,6 +22,10 @@ Template.playerCharactersList.helpers({
 });
 
 Template.playerCharactersList.events({
+    "click .player-character-delete": function(e){
+        PlayerCharacterCollection.remove(this);
+        e.stopPropagation();
+    },
     "click tr": function(){
         var params = Router.current().params;
         params.playerCharacterId = this.id();
