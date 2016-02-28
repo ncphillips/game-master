@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                         {{#each characters}}
-                            <tr class="{{#if isCurrentCharacter @index}}info{{/if}}" id="character-{{id}}">
+                            <tr class="{{#if isCurrentCharacter id}}info{{/if}}" id="character-{{id}}">
                                 <td>
                                     <input type="number" min="0" value="{{initiative}}" class="pc-initiative form-control" style="width: 60px"/>
                                 </td>

@@ -6,9 +6,9 @@ Template.encountersRun.helpers({
             return (this.encounter.round() * 6) + " seconds";
         }
     },
-    isCurrentCharacter: function(index){
+    isCurrentCharacter: function(id){
         var encounter = EncounterCollection.findById(Router.current().params.encounterId);
-        return encounter.currentCharacterIndex() === index;
+        return encounter.currentCharacterId() === id;
     },
     isUnconscious: function(hp){
         return hp <= 0;
@@ -88,7 +88,6 @@ Template.encountersRun.events({
     },
     "click #next-turn": function(){
         this.encounter.nextTurn();
-        console.log(this.encounter);
 
         this.encounter.initiativeOrder().forEach(function(character){
             var damage_selector = "#character-" + character.id() + " .deal-damage";
