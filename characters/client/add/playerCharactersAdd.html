@@ -7,11 +7,15 @@
         </span>
     </h1>
     <div class="row">
-        <div class="control-group col-xs-6">
+        <div class="control-group col-xs-12">
             <label for="name">Name</label>
             <input id="name" type="text" value="" class="form-control"/>
         </div>
-        <div class="control-group col-xs-6">
+    </div>
+    <p>Everything below this line is optional.</p>
+    <hr/>
+    <div class="row">
+        <div class="control-group col-xs-12">
             <label for="character-player">Player</label>
             <select id="character-player" class="form-control">
                 {{#each playersInCampaign}}
@@ -20,130 +24,136 @@
             </select>
         </div>
     </div>
-    <div class="control-group">
-        <label for="size">Size</label>
-        <select id="size" class="form-control">
-            <option value="T">Tiny</option>
-            <option value="S">Small</option>
-            <option selected value="M">Medium</option>
-            <option value="L">Large</option>
-            <option value="G">Gargantuan</option>
-        </select>
-    </div>
-    <div class="control-group">
-        <label for="ac">Armor Class</label>
-        <input id="ac" type="number" value="10" class="form-control"/>
-    </div>
-    <div class="control-group">
-        <label for="hp-max">Hit Points</label>
-        <input id="hp-max" type="number" value="10" class="form-control"/>
-    </div>
-    <div>
-        <h3>Speed</h3>
-        <div class="col-xs-3"><b>Walk:</b></div><div class="col-xs-9"><input id="speed_walk" class="form-control"></div>
-        <div class="col-xs-3"><b>Burrow:</b></div><div class="col-xs-9"><input id="speed_burrow" class="form-control"></div>
-        <div class="col-xs-3"><b>Climb:</b></div><div class="col-xs-9"><input id="speed_climb" class="form-control"></div>
-        <div class="col-xs-3"><b>Fly:</b></div><div class="col-xs-9"><input id="speed_fly" class="form-control"></div>
-        <div class="col-xs-3"><b>Swim:</b></div><div class="col-xs-9"><input id="speed_swim" class="form-control"></div>
-    </div>
-    <div class="col-xs-12">
-        <h4>Ability Scores</h4>
-        <table class="table table-condensed">
-            <thead>
-            <tr>
-                <th>STR</th>
-                <th>DEX</th>
-                <th>CON</th>
-                <th>INT</th>
-                <th>WIS</th>
-                <th>CHA</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><input id="ab_str" type="number" value="10" class="form-control"/>  </td>
-                <td>  <input id="ab_dex" type="number" value="10" class="form-control"/> </td>
-                <td>  <input id="ab_con" type="number" value="10" class="form-control"/> </td>
-                <td>  <input id="ab_int" type="number" value="10" class="form-control"/> </td>
-                <td> <input id="ab_wis" type="number" value="10" class="form-control"/>  </td>
-                <td> <input id="ab_cha" type="number" value="10" class="form-control"/>  </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-xs-12">
-        <div class="col-xs-12">
-            <h4>Saving Throws</h4>
-            <table class="table table-condensed">
-                <thead>
-                <tr>
-                    <th>STR</th>
-                    <th>DEX</th>
-                    <th>CON</th>
-                    <th>INT</th>
-                    <th>WIS</th>
-                    <th>CHA</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><input id="st_str" type="number" value="10" class="form-control"/>  </td>
-                    <td>  <input id="st_dex" type="number" value="10" class="form-control"/> </td>
-                    <td>  <input id="st_con" type="number" value="10" class="form-control"/> </td>
-                    <td>  <input id="st_int" type="number" value="10" class="form-control"/> </td>
-                    <td> <input id="st_wis" type="number" value="10" class="form-control"/>  </td>
-                    <td> <input id="st_cha" type="number" value="10" class="form-control"/>  </td>
-                </tr>
-                </tbody>
-            </table>
+    <div class="row">
+        <div class="control-group col-sm-4">
+            <label for="size">Size</label>
+            <select id="size" class="form-control">
+                <option value="T">Tiny</option>
+                <option value="S">Small</option>
+                <option selected value="M">Medium</option>
+                <option value="L">Large</option>
+                <option value="G">Gargantuan</option>
+            </select>
         </div>
-        <h4>Other Info</h4>
-        <div class="row">
-            {{#if languages}}
-                <div class="col-xs-3"><b>Languages:</b></div>
-                <div class="col-xs-9">{{languageList languages}}</div>
-            {{/if}}
-
-            {{#if cr}}
-                <div class="col-xs-3"><b>CR:</b></div>
-                <div class="col-xs-9">{{cr}}</div>
-            {{/if}}
-
-            {{# if damageAdjustments.resistance}}
-                <div class="col-xs-3"><b>Damage Resistances</b></div>
-                <div class="col-xs-9">{{damageAdjustments.resistance}}</div>
-            {{/if}}
-
-            {{# if damageAdjustments.immunities}}
-                <div class="row">
-                    <div class="col-xs-3"><b>Damage Immunities</b></div>
-                    <div class="col-xs-9">{{damageAdjustments.immunities}}</div>
-                </div>
-            {{/if}}
+        <div class="control-group col-sm-4">
+            <label for="ac">Armor Class</label>
+            <input id="ac" type="number" value="10" class="form-control"/>
         </div>
+        <div class="control-group col-sm-4">
+            <label for="hp-max">Hit Points</label>
+            <input id="hp-max" type="number" value="10" class="form-control"/>
+        </div>
+    </div>
+    <h3>Speed</h3>
+    <div class="row">
+        <div class="col-sm-2"><label>Walk:</label><input id="speed_walk" class="form-control"></div>
+        <div class="col-sm-2"><label>Burrow:</label><input id="speed_burrow" class="form-control"></div>
+        <div class="col-sm-2"><label>Climb:</label><input id="speed_climb" class="form-control"></div>
+        <div class="col-sm-2"><label>Fly:</label><input id="speed_fly" class="form-control"></div>
+        <div class="col-sm-2"><label>Swim:</label><input id="speed_swim" class="form-control"></div>
+    </div>
+    <h3>Ability Scores</h3>
+    <div class="row">
+        <div class="control-group col-sm-2">
+            <label>STR</label>
+            <input id="ab_str" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>DEX</label>
+            <input id="ab_dex" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>CON</label>
+            <input id="ab_con" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>INT</label>
+            <input id="ab_int" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>WIS</label>
+            <input id="ab_wis" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>CHA</label>
+            <input id="ab_cha" type="number" value="10" class="form-control"/>
+        </div>
+    </div>
+    <h3>Saving Throws</h3>
+    <div class="row">
+       <div class="control-group col-sm-2">
+            <label>STR</label>
+            <input id="st_str" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>DEX</label>
+            <input id="st_dex" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>CON</label>
+            <input id="st_con" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>INT</label>
+            <input id="st_int" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>WIS</label>
+            <input id="st_wis" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label>CHA</label>
+            <input id="st_cha" type="number" value="10" class="form-control"/>
+        </div>
+    </div>
+    <!--
+    <h4></h4>
+    <div class="row">
+        {{#if languages}}
+            <div class="col-xs-3"><b>Languages:</b></div>
+            <div class="col-xs-9">{{languageList languages}}</div>
+        {{/if}}
 
-        <h4>Senses</h4>
-        <div class="row">
-            <div class="control-group col-sm-2">
-                <label for="senses_passive">Passive</label>
-                <input id="senses_passive" type="number" value="10" class="form-control"/>
+        {{#if cr}}
+            <div class="col-xs-3"><b>CR:</b></div>
+            <div class="col-xs-9">{{cr}}</div>
+        {{/if}}
+
+        {{# if damageAdjustments.resistance}}
+            <div class="col-xs-3"><b>Damage Resistances</b></div>
+            <div class="col-xs-9">{{damageAdjustments.resistance}}</div>
+        {{/if}}
+
+        {{# if damageAdjustments.immunities}}
+            <div class="row">
+                <div class="col-xs-3"><b>Damage Immunities</b></div>
+                <div class="col-xs-9">{{damageAdjustments.immunities}}</div>
             </div>
-            <div class="control-group col-sm-2">
-                <label for="senses_darkvision">Darkvision</label>
-                <input id="senses_darkvision" type="number" value="" class="form-control"/>
-            </div>
-            <div class="control-group col-sm-2">
-                <label for="senses_tremorsense">Tremorsense</label>
-                <input id="senses_tremorsense" type="number" value="" class="form-control"/>
-            </div>
-            <div class="control-group col-sm-2">
-                <label for="senses_blindsight">Blindsight</label>
-                <input id="senses_blindsight" type="number" value="" class="form-control"/>
-            </div>
-            <div class="control-group col-sm-2">
-                <label for="senses_truesight">Truesght</label>
-                <input id="senses_truesight" type="number" value="" class="form-control"/>
-            </div>
+        {{/if}}
+    </div>
+    -->
+
+    <h3>Senses</h3>
+    <div class="row">
+        <div class="control-group col-sm-2">
+            <label for="senses_passive">Passive</label>
+            <input id="senses_passive" type="number" value="10" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label for="senses_darkvision">Darkvision</label>
+            <input id="senses_darkvision" type="number" value="" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label for="senses_tremorsense">Tremorsense</label>
+            <input id="senses_tremorsense" type="number" value="" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label for="senses_blindsight">Blindsight</label>
+            <input id="senses_blindsight" type="number" value="" class="form-control"/>
+        </div>
+        <div class="control-group col-sm-2">
+            <label for="senses_truesight">Truesght</label>
+            <input id="senses_truesight" type="number" value="" class="form-control"/>
         </div>
     </div>
     <button class="btn btn-primary add-player-character pull-right">Save</button>
