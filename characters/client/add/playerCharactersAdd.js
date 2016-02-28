@@ -32,13 +32,21 @@ Template.playerCharactersAdd.events({
         e.preventDefault();
 
         var urlParams = Router.current().params;
+        var name =  $("#name").val();
+        var hpMax = $("#hp-max").val();
+
+        if (!(hpMax && name)) {
+            alert("Missing Name or HP");
+            return;
+        }
 
         var playerCharacter = new PlayerCharacter({
-            name: $("#name").val(),
+            name: name,
             player: $('#character-player :selected').val(),
             classLevel: $("#character-class-level").val(),
             race: $("#character-race").val(),
-            hp_max: $("#hp-max").val(),
+            max_hp: hpMax,
+            hp: hpMax,
             playerCharacter: true,
             size: $("#size").val(),
             ac: $("#ac").val(),

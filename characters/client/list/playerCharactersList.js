@@ -3,12 +3,21 @@ Template.playerCharactersList.helpers({
         return Router.current().params;
     },
     crumbs: function(){
-        var campaignId = this.campaign.id();
-        var text = this.campaign.name();
-        return {breadcrumbs: [
-            {text: "Campaigns", name: "campaignsList", data: {}},
-            {text: text,  name: "campaignsView", data: {campaignId: campaignId}}
-        ]};
+        if (this.campaign){
+            var campaignId = this.campaign.id();
+            var text = this.campaign.name();
+            return {
+                breadcrumbs: [{
+                    text: "Campaigns",
+                    name: "campaignsList",
+                    data: {}
+                }, {
+                    text: text,
+                    name: "campaignsView",
+                    data: {campaignId: campaignId}
+                }]
+            };
+        }
     }
 });
 
