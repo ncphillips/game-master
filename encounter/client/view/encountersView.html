@@ -32,7 +32,7 @@
                         <div class="list-group-item clearfix">
                             {{name}}
                             {{#if notStarted}}
-                            <span class="btn btn-danger btn-sm remove-player-character pull-right">Remove</span>
+                                <span class="btn btn-danger btn-sm remove-player-character pull-right">Remove</span>
                             {{/if}}
                         </div>
                     {{/each}}
@@ -94,7 +94,9 @@
                 <tr>
                     <td>{{count}}</td>
                     <td>{{monsterName}}</td>
-                    <td>{{#if notStarted}}<input type="button" class="btn btn-sm btn-danger remove-monster" value="Remove">{{/if}}</td>
+                    <td>
+                        <input type="button" class="btn btn-sm btn-danger remove-monster" value="Remove">
+                    </td>
                 </tr>
             {{/each}}
             </tbody>

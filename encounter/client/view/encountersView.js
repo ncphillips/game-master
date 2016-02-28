@@ -16,11 +16,13 @@ Template.encountersView.helpers({
         }
         return [];
     },
-    notStarted: function() {
-        return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES().NOT_STARTED;
+    notStarted: function(){
+        if(this.encounter){
+            return !(this.encounter.isRunning());
+        }
     },
     inProgress: function() {
-        return this.encounter && this.encounter.status() === ENCOUNTER_STATUSES().IN_PROGRESS;
+        return this.encounter && this.encounter.isRunning();
     },
     isDone: function() {
         return this.status === ENCOUNTER_STATUSES().DONE;
