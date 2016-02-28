@@ -3,7 +3,7 @@ ENTER_CODE = 13;
 Template.encountersRun.helpers({
     time: function(){
         if (this.encounter){
-            return (this.encounter.round() * 6) + " seconds";
+            return ((this.encounter.round() - 1) * 6) + " seconds";
         }
     },
     isCurrentCharacter: function(id){
